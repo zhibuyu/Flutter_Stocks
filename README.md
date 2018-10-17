@@ -1,0 +1,2 @@
+# mystocks
+Flutter Sotck APP
