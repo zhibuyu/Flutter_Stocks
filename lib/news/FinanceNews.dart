@@ -8,8 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:mystocks/Util/TimeUtils.dart';
 import 'package:mystocks/news/entiy/news_enity.dart';
+import 'package:mystocks/widget/webview.dart';
 
 class FinanceNewsPage extends StatefulWidget {
   FinanceNewsPage({Key key}) : super(key: key);
@@ -79,6 +81,7 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
    */
   Widget getRow(int i) {
     print("加载列表getRow==》" + i.toString());
+    String articleTitle=widgets[i].articleTitle;
     int time = widgets[i].time;
     String time_str = readTimestamp(time);
     return new GestureDetector(
@@ -108,7 +111,7 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
                         children: <Widget>[
                           new Container(
                             child: new Text(
-                              "${widgets[i].articleTitle}",
+                              articleTitle,
                               style: new TextStyle(
                                   fontSize: 20.0, fontWeight: FontWeight.w700),
                               maxLines: 1,
@@ -156,7 +159,7 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
           ),
         ),
         onTap : () {
-          onItemClick(i);
+          onItemClick(i,articleTitle);
         });
   }
 
@@ -202,7 +205,17 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
   /**
    * 列表点击
    */
-  void onItemClick(int i) {
+  void onItemClick(int i,String articleTitle) {
+    String h5_url=widgets[i].url;
+    print("列表点击=h5_url=》"+h5_url);
+    Navigator.push(
+        context,
+        new MaterialPageRoute(
+            builder: (context) => new WebPage(h5_url,articleTitle)));
+
+//    new WebPage(h5_url,articleTitle);
+//    final  flutterWebviewPlugin = new FlutterWebviewPlugin();
+//    flutterWebviewPlugin.launch(h5_url, hidden: true);
     print("列表点击==》"+i.toString());
   }
 }
