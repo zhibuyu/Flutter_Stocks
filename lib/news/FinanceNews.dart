@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:mystocks/Util/TimeUtils.dart';
 import 'package:mystocks/news/entiy/news_enity.dart';
 
 class FinanceNewsPage extends StatefulWidget {
@@ -77,7 +78,9 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
    * 列表item
    */
   Widget getRow(int i) {
-    print("加载列表getRow==》"+i.toString());
+    print("加载列表getRow==》" + i.toString());
+    int time = widgets[i].time;
+    String time_str =readTimestamp(time);
     return new Padding(
 //      padding: new EdgeInsets.all(10.0),
       padding: new EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
@@ -120,12 +123,27 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
                         alignment: Alignment.topLeft,
                       ),
                       new Expanded(
-                          child: new Container(
-                        child: new Text("${widgets[i].articleAuthor}",
-                            style: new TextStyle(fontSize: 10.0),
-                            textAlign: TextAlign.end),
-                        alignment: FractionalOffset.bottomRight,
-                      ))
+                          child:
+                          new Container(
+                          margin: new EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
+                          child:
+
+                            new Stack(
+                              children: <Widget>[
+                            new Container(
+                            child: new Text("${widgets[i].articleAuthor}",
+                                style: new TextStyle(fontSize: 10.0)),
+                            alignment: FractionalOffset.bottomLeft,
+                          ),
+                        new Container(
+                            child: new Text(time_str,
+                                style: new TextStyle(fontSize: 10.0)),
+                            alignment: FractionalOffset.bottomRight,
+                          ),
+                              ],
+                            ),
+                          ),
+                          )
                     ],
                   ),
                 ),
@@ -138,15 +156,16 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
       ),
     );
   }
-  void getDatas() async{
+
+  void getDatas() async {
     List<Data> datas;
     String url =
         "https://graphql.shenjian.io/?user_key=e66f2652b0-NDlmNDhmOT&timestamp=1539428428233&sign=9cb7d1ba1ce8facb996b254d42415941&source_id=2358538&query=source(limit:20){}";
     print("请求的url===》" + url);
     Dio dio = new Dio();
-    Response response=await dio.get(url);
+    Response response = await dio.get(url);
     var jsonString = response.data;
-    print("jsonString==>"+jsonString.toString());
+    print("jsonString==>" + jsonString.toString());
     try {
       var news = new news_enity.fromJson(jsonString);
       var code = news.code;
@@ -165,8 +184,8 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
   }
 
   getImage(int i) {
-    print("加载图片getImage==》"+i.toString());
-    String img_url=widgets[i].articleThumbnail;
+    print("加载图片getImage==》" + i.toString());
+    String img_url = widgets[i].articleThumbnail;
     return new CachedNetworkImage(
       imageUrl: img_url,
 //      placeholder: new CircularProgressIndicator(),
@@ -176,10 +195,4 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
       width: 100.0,
     );
   }
-
-
-
-
-
-
 }
