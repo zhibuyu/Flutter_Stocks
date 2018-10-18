@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:mystocks/news/BusinessNews.dart';
+import 'package:mystocks/news/FinanceNews.dart';
 import 'package:mystocks/pages/DiscoveryPage.dart';
 import 'package:mystocks/pages/MyInfoPage.dart';
 import 'package:mystocks/pages/TweetsListPage.dart';
@@ -124,7 +124,7 @@ class _BottomNavigationDemoState extends State<BottomNavigationDemo>
       NavigationIconView(
         icon: const Icon(Icons.access_alarm),
         title: '新闻',
-        color: Colors.deepPurple,
+        color: new Color.fromARGB(255, 0, 215, 198),
         vsync: this,
       ),
       NavigationIconView(
@@ -158,7 +158,7 @@ class _BottomNavigationDemoState extends State<BottomNavigationDemo>
 
     _body = new IndexedStack(
       children: <Widget>[
-        new BusinessNewsPage(),
+        new FinanceNewsPage(),
         new TweetsListPage(),
         new DiscoveryPage(),
         new MyInfoPage()
@@ -220,7 +220,7 @@ class _BottomNavigationDemoState extends State<BottomNavigationDemo>
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('子不语股票'),
+        title: new Text('子不语股票',style: new TextStyle(color: Colors.white),),
         actions: <Widget>[
           PopupMenuButton<BottomNavigationBarType>(
             onSelected: (BottomNavigationBarType value) {

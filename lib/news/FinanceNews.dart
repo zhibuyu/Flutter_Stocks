@@ -10,18 +10,18 @@ import 'package:dio/dio.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:mystocks/news/entiy/news_enity.dart';
 
-class BusinessNewsPage extends StatefulWidget {
-  BusinessNewsPage({Key key}) : super(key: key);
+class FinanceNewsPage extends StatefulWidget {
+  FinanceNewsPage({Key key}) : super(key: key);
 
   @override
-  _BusinessNewsPageState createState() => new _BusinessNewsPageState();
+  FinanceNewsPageState createState() => new FinanceNewsPageState();
 }
 
-class _BusinessNewsPageState extends State<BusinessNewsPage> {
+class FinanceNewsPageState extends State<FinanceNewsPage> {
   List<Data> widgets = new List();
   bool loaded = false;
 
-  _BusinessNewsPageState() {
+  FinanceNewsPageState() {
     getDatas();
   }
 
