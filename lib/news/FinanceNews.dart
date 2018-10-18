@@ -80,81 +80,84 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
   Widget getRow(int i) {
     print("加载列表getRow==》" + i.toString());
     int time = widgets[i].time;
-    String time_str =readTimestamp(time);
-    return new Padding(
+    String time_str = readTimestamp(time);
+    return new GestureDetector(
+        child: Padding(
 //      padding: new EdgeInsets.all(10.0),
-      padding: new EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-      child: new Column(
-        children: <Widget>[
-          new Row(
-            crossAxisAlignment: CrossAxisAlignment.start, //纵向对齐方式：起始边对齐
-            mainAxisSize: MainAxisSize.max,
+          padding: new EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+          child: new Column(
             children: <Widget>[
-              new Expanded(
-                child: Container(
-                  height: 95.0,
-                  child: getImage(i),
-                  alignment: FractionalOffset.center,
-                ),
-                flex: 1,
-              ),
-              new Expanded(
-                child: Container(
-                  height: 95.0,
-                  margin: new EdgeInsets.fromLTRB(5.0, 0.0, 0.0, 0.0),
-                  child: new Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      new Container(
-                        child: new Text(
-                          "${widgets[i].articleTitle}",
-                          style: new TextStyle(
-                              fontSize: 20.0, fontWeight: FontWeight.w700),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        alignment: FractionalOffset.topLeft,
-                      ),
-                      new Container(
-                        child: new Text("${widgets[i].articleBrief}",
-                            style: new TextStyle(fontSize: 16.0),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis),
-                        alignment: Alignment.topLeft,
-                      ),
-                      new Expanded(
-                          child:
-                          new Container(
-                          margin: new EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
-                          child:
-
-                            new Stack(
-                              children: <Widget>[
-                            new Container(
-                            child: new Text("${widgets[i].articleAuthor}",
-                                style: new TextStyle(fontSize: 10.0)),
-                            alignment: FractionalOffset.bottomLeft,
-                          ),
-                        new Container(
-                            child: new Text(time_str,
-                                style: new TextStyle(fontSize: 10.0)),
-                            alignment: FractionalOffset.bottomRight,
-                          ),
-                              ],
-                            ),
-                          ),
-                          )
-                    ],
+              new Row(
+                crossAxisAlignment: CrossAxisAlignment.start, //纵向对齐方式：起始边对齐
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  new Expanded(
+                    child: Container(
+                      height: 95.0,
+                      child: getImage(i),
+                      alignment: FractionalOffset.center,
+                    ),
+                    flex: 1,
                   ),
-                ),
-                flex: 3,
+                  new Expanded(
+                    child: Container(
+                      height: 95.0,
+                      margin: new EdgeInsets.fromLTRB(5.0, 0.0, 0.0, 0.0),
+                      child: new Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          new Container(
+                            child: new Text(
+                              "${widgets[i].articleTitle}",
+                              style: new TextStyle(
+                                  fontSize: 20.0, fontWeight: FontWeight.w700),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            alignment: FractionalOffset.topLeft,
+                          ),
+                          new Container(
+                            child: new Text("${widgets[i].articleBrief}",
+                                style: new TextStyle(fontSize: 16.0),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis),
+                            alignment: Alignment.topLeft,
+                          ),
+                          new Expanded(
+                            child: new Container(
+                              margin:
+                                  new EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
+                              child: new Stack(
+                                children: <Widget>[
+                                  new Container(
+                                    child: new Text(
+                                        "${widgets[i].articleAuthor}",
+                                        style: new TextStyle(fontSize: 10.0)),
+                                    alignment: FractionalOffset.bottomLeft,
+                                  ),
+                                  new Container(
+                                    child: new Text(time_str,
+                                        style: new TextStyle(fontSize: 10.0)),
+                                    alignment: FractionalOffset.bottomRight,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    flex: 3,
+                  ),
+                ],
               ),
+              new Divider(), //分割线
             ],
           ),
-          new Divider(), //分割线
-        ],
-      ),
-    );
+        ),
+        onTap : () {
+          onItemClick(i);
+        });
   }
 
   void getDatas() async {
@@ -194,5 +197,12 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
       height: 85.0,
       width: 100.0,
     );
+  }
+
+  /**
+   * 列表点击
+   */
+  void onItemClick(int i) {
+    print("列表点击==》"+i.toString());
   }
 }
