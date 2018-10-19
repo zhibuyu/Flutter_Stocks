@@ -8,10 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:mystocks/Util/TimeUtils.dart';
+import 'package:mystocks/news/NewsWebPage.dart';
 import 'package:mystocks/news/entiy/news_enity.dart';
-import 'package:mystocks/widget/webview.dart';
 
 class FinanceNewsPage extends StatefulWidget {
   FinanceNewsPage({Key key}) : super(key: key);
@@ -211,7 +210,7 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
     Navigator.push(
         context,
         new MaterialPageRoute(
-            builder: (context) => new WebPage(h5_url,articleTitle)));
+            builder: (context) => new NewsWebPage(h5_url,articleTitle)));
 
 //    new WebPage(h5_url,articleTitle);
 //    final  flutterWebviewPlugin = new FlutterWebviewPlugin();
