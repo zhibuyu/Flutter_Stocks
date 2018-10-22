@@ -83,6 +83,7 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
       );
     }
   }
+
   getProgressDialog() {
     return new Center(child: new CircularProgressIndicator());
   }
