@@ -1,10 +1,10 @@
-import 'package:json_annotation/json_annotation.dart';
-
+import 'package:json_annotation/json_annotation.dart'; 
+  
 part 'news_enity.g.dart';
 
 
 @JsonSerializable()
-class news_enity extends Object {
+  class news_enity extends Object {
 
   @JsonKey(name: 'code')
   int code;
@@ -20,14 +20,17 @@ class news_enity extends Object {
 
 }
 
-
+  
 @JsonSerializable()
-class Result extends Object {
+  class Result extends Object {
 
   @JsonKey(name: 'data')
   List<Data> data;
 
-  Result(this.data,);
+  @JsonKey(name: 'page_info')
+  Page_info pageInfo;
+
+  Result(this.data,this.pageInfo,);
 
   factory Result.fromJson(Map<String, dynamic> srcJson) => _$ResultFromJson(srcJson);
 
@@ -35,9 +38,9 @@ class Result extends Object {
 
 }
 
-
+  
 @JsonSerializable()
-class Data extends Object {
+  class Data extends Object {
 
   @JsonKey(name: 'article_title')
   String articleTitle;
@@ -83,4 +86,22 @@ class Data extends Object {
 
 }
 
+  
+@JsonSerializable()
+  class Page_info extends Object {
 
+  @JsonKey(name: 'has_next_page')
+  bool hasNextPage;
+
+  @JsonKey(name: 'end_cursor')
+  int endCursor;
+
+  Page_info(this.hasNextPage,this.endCursor,);
+
+  factory Page_info.fromJson(Map<String, dynamic> srcJson) => _$Page_infoFromJson(srcJson);
+
+  Map<String, dynamic> toJson() => _$Page_infoToJson(this);
+
+}
+
+  

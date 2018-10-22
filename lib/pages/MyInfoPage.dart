@@ -123,7 +123,7 @@ class MyInfoPageState extends State<MyInfoPage> {
       padding: const EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
       child: new Row(
         children: <Widget>[
-          icons[i],
+//          icons[i],
           new Expanded(
               child: new Text(
             title,

@@ -8,9 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:mystocks/Util/MD5Utils.dart';
 import 'package:mystocks/Util/TimeUtils.dart';
 import 'package:mystocks/news/NewsWebPage.dart';
 import 'package:mystocks/news/entiy/news_enity.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class FinanceNewsPage extends StatefulWidget {
   FinanceNewsPage({Key key}) : super(key: key);
@@ -20,17 +22,40 @@ class FinanceNewsPage extends StatefulWidget {
 }
 
 class FinanceNewsPageState extends State<FinanceNewsPage> {
-  List<Data> widgets = new List();
+  List<Data> listData = new List();
   bool loaded = false;
 
+  var listTotalSize = 0;
+
+  int lastone_id = 0;
+  bool has_next_page;
+
+  final GlobalKey<RefreshIndicatorState> refreshIndicatorKey = new GlobalKey<RefreshIndicatorState>();
+
+  ScrollController controller = new ScrollController();
+
   FinanceNewsPageState() {
-    getDatas();
+    controller.addListener(() {
+      var maxScroll = controller.position.maxScrollExtent;
+      var pixels = controller.position.pixels;
+//      if (maxScroll == pixels && listData.length < listTotalSize) {
+      if (maxScroll == pixels) {
+        // scroll to bottom, get next page data
+        //加载更多
+        print("加载更多开始---");
+//        curPage++;
+//        getNewsList(true);
+        getDatas(true);
+      }
+    });
+//    getDatas();
   }
 
   @override
   void initState() {
     super.initState();
-//    getDatas();
+    print("新闻列表initState ... ");
+    getDatas(false);
   }
 
   showLoadingDialog() {
@@ -51,9 +76,10 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
     if (showLoadingDialog()) {
       return getProgressDialog();
     } else {
+      Widget listView = getListView();
       return new Container(
         padding: new EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-        child: getListView(),
+        child: new RefreshIndicator(child: listView, onRefresh: pullToRefresh),
       );
     }
   }
@@ -70,18 +96,22 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
   }
 
   ListView getListView() => new ListView.builder(
-      itemCount: (widgets == null) ? 0 : widgets.length,
-      itemBuilder: (BuildContext context, int position) {
-        return getRow(position);
-      });
+        itemCount: (listData == null) ? 0 : listData.length,
+        itemBuilder: (BuildContext context, int position) {
+          return getRow(position);
+        },
+        physics: new AlwaysScrollableScrollPhysics(),
+        shrinkWrap: true,
+        controller: controller,
+      );
 
   /**
    * 列表item
    */
   Widget getRow(int i) {
     print("加载列表getRow==》" + i.toString());
-    String articleTitle=widgets[i].articleTitle;
-    int time = widgets[i].time;
+    String articleTitle = listData[i].articleTitle;
+    int time = listData[i].time;
     String time_str = readTimestamp(time);
     return new GestureDetector(
         child: Padding(
@@ -119,7 +149,7 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
                             alignment: FractionalOffset.topLeft,
                           ),
                           new Container(
-                            child: new Text("${widgets[i].articleBrief}",
+                            child: new Text("${listData[i].articleBrief}",
                                 style: new TextStyle(fontSize: 16.0),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis),
@@ -133,7 +163,7 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
                                 children: <Widget>[
                                   new Container(
                                     child: new Text(
-                                        "${widgets[i].articleAuthor}",
+                                        "${listData[i].articleAuthor}",
                                         style: new TextStyle(fontSize: 10.0)),
                                     alignment: FractionalOffset.bottomLeft,
                                   ),
@@ -157,15 +187,37 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
             ],
           ),
         ),
-        onTap : () {
-          onItemClick(i,articleTitle);
+        onTap: () {
+          onItemClick(i, articleTitle);
         });
   }
 
-  void getDatas() async {
+  void getDatas(bool flag) async {
     List<Data> datas;
-    String url =
-        "https://graphql.shenjian.io/?user_key=e66f2652b0-NDlmNDhmOT&timestamp=1539428428233&sign=9cb7d1ba1ce8facb996b254d42415941&source_id=2358538&query=source(limit:20){}";
+    String user_key = "e66f2652b0-NDlmNDhmOT";
+    var now = new DateTime.now();
+    String time = now.millisecondsSinceEpoch.toString();
+    String secret_key = "llNjZmMjY1MmIwNT-58ba0f5e5a49f48";
+    String md5_str = StringToMd5(user_key + time + secret_key);
+    String source_id = "2358538";
+    String query;
+    if (!flag) {
+      query =
+          "source(limit: 10,sort:\"desc\"),{data{}, page_info{has_next_page, end_cursor}}";
+    } else {
+      query =
+          "source(limit: 10,__id:{gte:${lastone_id},lte:${lastone_id + 10}},sort:\"desc\"),{data{}, page_info{has_next_page, end_cursor}}";
+    }
+    String url = "https://graphql.shenjian.io/?user_key=" +
+        user_key +
+        "&timestamp=" +
+        time +
+        "&sign=" +
+        md5_str +
+        "&source_id=" +
+        source_id +
+        "&query=" +
+        query;
     print("请求的url===》" + url);
     Dio dio = new Dio();
     Response response = await dio.get(url);
@@ -176,21 +228,40 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
       var code = news.code;
       if (code == 0) {
         Result result = news.result;
-        datas = result.data;
+        if (!flag) {
+//          datas.clear();
+          datas = result.data;
+        } else {
+          datas.addAll(result.data);
+        }
+        lastone_id = result.pageInfo.endCursor;
+        has_next_page = result.pageInfo.hasNextPage;
       }
       print("数据datas==》" + datas.toString());
+      Fluttertoast.showToast(
+          msg: "请求成功",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIos: 1,bgcolor: "#OOOOOO",textcolor: '#ffffff'
+      );
     } catch (e) {
+      Fluttertoast.showToast(
+          msg: "异常："+datas.toString(),
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIos: 1,bgcolor: "#e74c3c",textcolor: '#ffffff'
+      );
       print("异常==》" + e.toString());
     }
     loaded = true;
     setState(() {
-      widgets = datas;
+      listData = datas;
     });
   }
 
   getImage(int i) {
     print("加载图片getImage==》" + i.toString());
-    String img_url = widgets[i].articleThumbnail;
+    String img_url = listData[i].articleThumbnail;
     return new CachedNetworkImage(
       imageUrl: img_url,
 //      placeholder: new CircularProgressIndicator(),
@@ -204,17 +275,33 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
   /**
    * 列表点击
    */
-  void onItemClick(int i,String articleTitle) {
-    String h5_url=widgets[i].url;
-    print("列表点击=h5_url=》"+h5_url);
+  void onItemClick(int i, String articleTitle) {
+    String h5_url = listData[i].url;
+    print("列表点击=h5_url=》" + h5_url);
     Navigator.push(
         context,
         new MaterialPageRoute(
-            builder: (context) => new NewsWebPage(h5_url,articleTitle)));
+            builder: (context) => new NewsWebPage(h5_url, articleTitle)));
 
 //    new WebPage(h5_url,articleTitle);
 //    final  flutterWebviewPlugin = new FlutterWebviewPlugin();
 //    flutterWebviewPlugin.launch(h5_url, hidden: true);
-    print("列表点击==》"+i.toString());
+    print("列表点击==》" + i.toString());
+  }
+
+  /**
+   *下拉刷新
+   */
+  Future<Null> pullToRefresh() {
+    lastone_id = 1;
+    getDatas(false);
+    return null;
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    controller.dispose();
   }
 }

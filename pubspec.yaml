@@ -26,6 +26,9 @@ dependencies:
   date_format: ^1.0.5
   intl: ^0.15.7
   flutter_webview_plugin: ^0.2.1+2
+  crypto: ^2.0.6
+  fluttertoast: ^2.0.9
+
 
 #dev_dependencies:
 #  flutter_test:
