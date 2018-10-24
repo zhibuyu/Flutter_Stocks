@@ -11,10 +11,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:mystocks/Util/StringUtil.dart';
 import 'package:mystocks/Util/TimeUtils.dart';
 import 'package:mystocks/news/NewsWebPage.dart';
+import 'package:mystocks/news/entiy/ListEnity.dart';
 import 'package:mystocks/news/entiy/news_enity.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_refresh/flutter_refresh.dart';
 
+/**
+ * 财经新闻页面
+ */
 class FinanceNewsPage extends StatefulWidget {
   FinanceNewsPage({Key key}) : super(key: key);
 
@@ -23,7 +27,7 @@ class FinanceNewsPage extends StatefulWidget {
 }
 
 class FinanceNewsPageState extends State<FinanceNewsPage> {
-  List<Data> listData = new List();
+  List<ListEnity> listData = new List();
   int lastone_id;
   int lastone_id_start = 0;
   int lastone_id_end = 0;
@@ -36,7 +40,7 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
   }
 
   getBody() {
-    if (listData == null) {
+    if (listData.isEmpty) {
       return getProgressDialog();
     } else {
       Widget listView = getListView();
@@ -73,85 +77,100 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
    */
   Widget getRow(int i) {
     print("加载列表getRow==》" + i.toString());
-    String articleTitle = listData[i].articleTitle;
-    int time = listData[i].time;
-    String time_str = readTimestamp(time);
-    return new GestureDetector(
-        child: Padding(
-          padding: new EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-          child: new Column(
-            children: <Widget>[
-              new Row(
-                crossAxisAlignment: CrossAxisAlignment.start, //纵向对齐方式：起始边对齐
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  new Expanded(
-                    child: Container(
-                      height: 95.0,
-                      child: getImage(i),
-                      alignment: FractionalOffset.center,
-                    ),
-                    flex: 1,
-                  ),
-                  new Expanded(
-                    child: Container(
-                      height: 95.0,
-                      margin: new EdgeInsets.fromLTRB(5.0, 0.0, 0.0, 0.0),
-                      child: new Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          new Container(
-                            child: new Text(
-                              articleTitle,
-                              style: new TextStyle(
-                                  fontSize: 20.0, fontWeight: FontWeight.w700),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            alignment: FractionalOffset.topLeft,
-                          ),
-                          new Container(
-                            child: new Text("${listData[i].articleBrief}",
-                                style: new TextStyle(fontSize: 16.0),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis),
-                            alignment: Alignment.topLeft,
-                          ),
-                          new Expanded(
-                            child: new Container(
-                              margin:
-                                  new EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
-                              child: new Stack(
-                                children: <Widget>[
-                                  new Container(
-                                    child: new Text(
-                                        "${listData[i].articleAuthor}",
-                                        style: new TextStyle(fontSize: 10.0)),
-                                    alignment: FractionalOffset.bottomLeft,
-                                  ),
-                                  new Container(
-                                    child: new Text(time_str,
-                                        style: new TextStyle(fontSize: 10.0)),
-                                    alignment: FractionalOffset.bottomRight,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
+    Data data = listData[i].data;
+    String type = listData[i].type;
+    if ("main" == type) {
+      String articleTitle = data.articleTitle;
+      int time = data.time;
+      String time_str = readTimestamp(time);
+      return new GestureDetector(
+          child: Padding(
+            padding: new EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+            child: new Column(
+              children: <Widget>[
+                new Row(
+                  crossAxisAlignment: CrossAxisAlignment.start, //纵向对齐方式：起始边对齐
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    new Expanded(
+                      child: Container(
+                        height: 95.0,
+                        child: getImage(data.articleThumbnail),
+                        alignment: FractionalOffset.center,
                       ),
+                      flex: 1,
                     ),
-                    flex: 3,
-                  ),
-                ],
-              ),
-              new Divider(), //分割线
-            ],
+                    new Expanded(
+                      child: Container(
+                        height: 95.0,
+                        margin: new EdgeInsets.fromLTRB(5.0, 0.0, 0.0, 0.0),
+                        child: new Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            new Container(
+                              child: new Text(
+                                articleTitle,
+                                style: new TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.w700),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              alignment: FractionalOffset.topLeft,
+                            ),
+                            new Container(
+                              child: new Text("${data.articleBrief}",
+                                  style: new TextStyle(fontSize: 16.0),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis),
+                              alignment: Alignment.topLeft,
+                            ),
+                            new Expanded(
+                              child: new Container(
+                                margin:
+                                    new EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
+                                child: new Stack(
+                                  children: <Widget>[
+                                    new Container(
+                                      child: new Text("${data.articleAuthor}",
+                                          style: new TextStyle(fontSize: 10.0)),
+                                      alignment: FractionalOffset.bottomLeft,
+                                    ),
+                                    new Container(
+                                      child: new Text(time_str,
+                                          style: new TextStyle(fontSize: 10.0)),
+                                      alignment: FractionalOffset.bottomRight,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      flex: 3,
+                    ),
+                  ],
+                ),
+                new Divider(), //分割线
+              ],
+            ),
           ),
+          onTap: () {
+            onItemClick(i, articleTitle);
+          });
+    } else {
+      print("加载底线");
+      return new Container(
+         height: 50.0,
+        child: new Text(
+          "——   我也是有底线的   ——",
+          style: new TextStyle(fontSize: 16.0,color: Colors.black38),
+
         ),
-        onTap: () {
-          onItemClick(i, articleTitle);
-        });
+        alignment: FractionalOffset.center,
+      );
+    }
   }
 
   /**
@@ -174,7 +193,7 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
             "source(limit: 20,__id:{gte:${lastone_id_start},lte:${lastone_id_end}},sort:\"desc\"),{data{}, page_info{has_next_page, end_cursor}}";
       }
     }
-    if (null != query) {
+    if (query.isNotEmpty) {
       String url = GetFinanceNewsUrl(query);
       print("请求的url===》" + url);
       Dio dio = new Dio();
@@ -195,9 +214,8 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
   /**
    * 列表中图片加载
    */
-  getImage(int i) {
-//    print("加载图片getImage==》" + i.toString());
-    String img_url = listData[i].articleThumbnail;
+  getImage(String img_url) {
+//    print("img_url==》" + img_url);
     return new CachedNetworkImage(
       imageUrl: img_url,
 //      placeholder: new CircularProgressIndicator(),
@@ -212,17 +230,11 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
    * 列表点击
    */
   void onItemClick(int i, String articleTitle) {
-    String h5_url = listData[i].url;
-    print("列表点击=h5_url=》" + h5_url);
+    String h5_url = (listData[i].data as Data).url;
     Navigator.push(
         context,
         new MaterialPageRoute(
             builder: (context) => new NewsWebPage(h5_url, articleTitle)));
-
-//    new WebPage(h5_url,articleTitle);
-//    final  flutterWebviewPlugin = new FlutterWebviewPlugin();
-//    flutterWebviewPlugin.launch(h5_url, hidden: true);
-    print("列表点击==》" + i.toString());
   }
 
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
@@ -233,12 +245,10 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
    */
   Future<Null> pullToRefresh() async {
     getDatas(false);
-    print("刷新完成--------");
     return null;
   }
 
   Future<Null> onFooterRefresh() async {
-    print("加载更多开始---");
     getDatas(true);
   }
 
@@ -251,28 +261,29 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
       var code = news.code;
       if (code == 0) {
         Result result = news.result;
+        lastone_id = result.pageInfo.endCursor;
+        has_next_page = result.pageInfo.hasNextPage;
         setState(() {
           if (!isLoadMore) {
             // 不是加载更多，则直接为变量赋值
-            listData = result.data;
+            for (Data data in result.data) {
+              ListEnity listEnity = new ListEnity("main", data);
+              listData.add(listEnity);
+            }
           } else {
             // 是加载更多，则需要将取到的news数据追加到原来的数据后面
-            List<Data> list1 = new List<Data>();
+            List<ListEnity> list1 = new List<ListEnity>();
             list1.addAll(listData);
-            list1.addAll(result.data);
+            for (Data data in result.data) {
+              ListEnity listEnity = new ListEnity("main", data);
+              list1.add(listEnity);
+            }
             listData = list1;
           }
-          lastone_id = result.pageInfo.endCursor;
-          has_next_page = result.pageInfo.hasNextPage;
           // 判断是否获取了所有的数据，如果是，则需要显示底部的"我也是有底线的"布局
           if (has_next_page == false) {
-            Fluttertoast.showToast(
-                msg: "这是最后一页",
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.BOTTOM,
-                timeInSecForIos: 1,
-                bgcolor: "#OOOOOO",
-                textcolor: '#ffffff');
+            ListEnity listEnity = new ListEnity("endline", null);
+            listData.add(listEnity);
           }
         });
       } else {
