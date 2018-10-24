@@ -13,6 +13,7 @@ import 'package:mystocks/Util/TimeUtils.dart';
 import 'package:mystocks/news/NewsWebPage.dart';
 import 'package:mystocks/news/entiy/news_enity.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_refresh/flutter_refresh.dart';
 
 class FinanceNewsPage extends StatefulWidget {
   FinanceNewsPage({Key key}) : super(key: key);
@@ -23,72 +24,26 @@ class FinanceNewsPage extends StatefulWidget {
 
 class FinanceNewsPageState extends State<FinanceNewsPage> {
   List<Data> listData = new List();
-  bool loaded = false;
-
-  var listTotalSize = 0;
-
-  int lastone_id = 0;
-  bool has_next_page;
-
-  final GlobalKey<RefreshIndicatorState> refreshIndicatorKey = new GlobalKey<RefreshIndicatorState>();
-
-  ScrollController controller = new ScrollController();
-
-  FinanceNewsPageState() {
-    controller.addListener(() {
-      var maxScroll = controller.position.maxScrollExtent;
-      var pixels = controller.position.pixels;
-//      if (maxScroll == pixels && listData.length < listTotalSize) {
-      if (maxScroll == pixels) {
-        // scroll to bottom, get next page data
-        //加载更多
-        print("加载更多开始---");
-//        curPage++;
-//        getNewsList(true);
-        getDatas(true);
-      }
-    });
-//    getDatas();
-  }
+  int lastone_id;
+  int lastone_id_start = 0;
+  int lastone_id_end = 0;
+  bool has_next_page = true;
 
   @override
   void initState() {
     super.initState();
-    print("新闻列表initState ... ");
     getDatas(false);
   }
 
-  showLoadingDialog() {
-    return !loaded;
-//    if(loaded=true){
-//
-//    }
-//    if (widgets == null) {
-//      return true;
-//    } else if (widgets.length == 0) {
-//      return true;
-//    }
-//
-//    return false;
-  }
-
   getBody() {
-//    if (showLoadingDialog()) {
-//      return getProgressDialog();
-//    } else {
-//      Widget listView = getListView();
-//      return new Container(
-//        padding: new EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-//        child: new RefreshIndicator(child: listView, onRefresh: pullToRefresh),
-//      );
-//    }
     if (listData == null) {
       return getProgressDialog();
     } else {
       Widget listView = getListView();
-      return new RefreshIndicator(
-        key: _refreshIndicatorKey,
-          child: listView, onRefresh: pullToRefresh);
+      return new Refresh(
+          onFooterRefresh: onFooterRefresh,
+          onHeaderRefresh: pullToRefresh,
+          child: listView);
     }
   }
 
@@ -111,7 +66,6 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
         },
         physics: new AlwaysScrollableScrollPhysics(),
         shrinkWrap: true,
-        controller: controller,
       );
 
   /**
@@ -124,7 +78,6 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
     String time_str = readTimestamp(time);
     return new GestureDetector(
         child: Padding(
-//      padding: new EdgeInsets.all(10.0),
           padding: new EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
           child: new Column(
             children: <Widget>[
@@ -201,71 +154,47 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
         });
   }
 
+  /**
+   * 请求数据
+   * isLoadMore 是否为加载更多
+   */
   void getDatas(bool isLoadMore) async {
-//    List<Data> datas;
     String query;
     if (!isLoadMore) {
-      query ="source(limit: 10,sort:\"desc\"),{data{}, page_info{has_next_page, end_cursor}}";
+      query =
+          "source(limit: 20,sort:\"desc\"),{data{}, page_info{has_next_page, end_cursor}}";
     } else {
-      query = "source(limit: 10,__id:{gte:${lastone_id},lte:${lastone_id + 10}},sort:\"desc\"),{data{}, page_info{has_next_page, end_cursor}}";
-    }
-    String url=GetFinanceNewsUrl(query);
-    print("请求的url===》" + url);
-    Dio dio = new Dio();
-    Response response = await dio.get(url);
-    var jsonString = response.data;
-    print("jsonString==>" + jsonString.toString());
-//    try {
-      var news = new news_enity.fromJson(jsonString);
-      var code = news.code;
-      if (code == 0) {
-        Result result = news.result;
-        setState(() {
-          if (!isLoadMore) {
-            // 不是加载更多，则直接为变量赋值
-//          datas.clear();
-            listData = result.data;
-          } else {
-            // 是加载更多，则需要将取到的news数据追加到原来的数据后面
-            List list1 = new List();
-            list1.addAll(listData);
-            list1.addAll(result.data);
-            // 判断是否获取了所有的数据，如果是，则需要显示底部的"我也是有底线的"布局
-            if (list1.length >= listTotalSize) {
-              list1.add("COMPLETE");
-            }
-          }
-        });
-        lastone_id = result.pageInfo.endCursor;
-        has_next_page = result.pageInfo.hasNextPage;
-        Fluttertoast.showToast(
-            msg: "请求成功",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIos: 1,bgcolor: "#OOOOOO",textcolor: '#ffffff'
-        );
-      }else{
-        Fluttertoast.showToast(
-            msg: news.error_info,
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIos: 1,bgcolor: "#OOOOOO",textcolor: '#ffffff'
-        );
+      if (lastone_id > 1) {
+        lastone_id_start = lastone_id - 21;
+        lastone_id_end = lastone_id - 1;
+        if (lastone_id_start < 1) {
+          lastone_id_start = 1;
+        }
+        query =
+            "source(limit: 20,__id:{gte:${lastone_id_start},lte:${lastone_id_end}},sort:\"desc\"),{data{}, page_info{has_next_page, end_cursor}}";
       }
-
-//    } catch (e) {
-//      Fluttertoast.showToast(
-//          msg: "异常："+e.toString(),
-//          toastLength: Toast.LENGTH_SHORT,
-//          gravity: ToastGravity.BOTTOM,
-//          timeInSecForIos: 1,bgcolor: "#e74c3c",textcolor: '#ffffff'
-//      );
-//      print("异常==》" + e.toString());
-//    }
-//    loaded = true;
-
+    }
+    if (null != query) {
+      String url = GetFinanceNewsUrl(query);
+      print("请求的url===》" + url);
+      Dio dio = new Dio();
+      Response response = await dio.get(url);
+      var jsonString = response.data;
+      DealDatas(jsonString, isLoadMore);
+    } else {
+      Fluttertoast.showToast(
+          msg: "已经没有更多了",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIos: 1,
+          bgcolor: "#OOOOOO",
+          textcolor: '#ffffff');
+    }
   }
 
+  /**
+   * 列表中图片加载
+   */
   getImage(int i) {
 //    print("加载图片getImage==》" + i.toString());
     String img_url = listData[i].articleThumbnail;
@@ -297,21 +226,73 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
   }
 
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
-  new GlobalKey<RefreshIndicatorState>();
+      new GlobalKey<RefreshIndicatorState>();
+
   /**
    *下拉刷新
    */
-  Future<Null> pullToRefresh() async{
-    lastone_id = 0;
+  Future<Null> pullToRefresh() async {
     getDatas(false);
     print("刷新完成--------");
     return null;
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    controller.dispose();
+  Future<Null> onFooterRefresh() async {
+    print("加载更多开始---");
+    getDatas(true);
+  }
+
+  /**
+   * 处理请求到的数据
+   */
+  void DealDatas(jsonString, bool isLoadMore) {
+    try {
+      var news = new news_enity.fromJson(jsonString);
+      var code = news.code;
+      if (code == 0) {
+        Result result = news.result;
+        setState(() {
+          if (!isLoadMore) {
+            // 不是加载更多，则直接为变量赋值
+            listData = result.data;
+          } else {
+            // 是加载更多，则需要将取到的news数据追加到原来的数据后面
+            List<Data> list1 = new List<Data>();
+            list1.addAll(listData);
+            list1.addAll(result.data);
+            listData = list1;
+          }
+          lastone_id = result.pageInfo.endCursor;
+          has_next_page = result.pageInfo.hasNextPage;
+          // 判断是否获取了所有的数据，如果是，则需要显示底部的"我也是有底线的"布局
+          if (has_next_page == false) {
+            Fluttertoast.showToast(
+                msg: "这是最后一页",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIos: 1,
+                bgcolor: "#OOOOOO",
+                textcolor: '#ffffff');
+          }
+        });
+      } else {
+        Fluttertoast.showToast(
+            msg: news.error_info,
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIos: 1,
+            bgcolor: "#OOOOOO",
+            textcolor: '#ffffff');
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+          msg: "异常：" + e.toString(),
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIos: 1,
+          bgcolor: "#e74c3c",
+          textcolor: '#ffffff');
+      print("异常==》" + e.toString());
+    }
   }
 }

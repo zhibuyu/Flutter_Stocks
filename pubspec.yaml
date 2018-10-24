@@ -28,6 +28,7 @@ dependencies:
   flutter_webview_plugin: ^0.2.1+2
   crypto: ^2.0.6
   fluttertoast: ^2.0.9
+  flutter_refresh: ^0.0.2
 
 
 #dev_dependencies:
