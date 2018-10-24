@@ -9,6 +9,9 @@ part 'news_enity.g.dart';
   @JsonKey(name: 'code')
   int code;
 
+  @JsonKey(name: 'error_info')
+  String error_info;
+
   @JsonKey(name: 'result')
   Result result;
 

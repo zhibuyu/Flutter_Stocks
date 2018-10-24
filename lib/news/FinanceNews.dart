@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:mystocks/Util/MD5Utils.dart';
+import 'package:mystocks/Util/StringUtil.dart';
 import 'package:mystocks/Util/TimeUtils.dart';
 import 'package:mystocks/news/NewsWebPage.dart';
 import 'package:mystocks/news/entiy/news_enity.dart';
@@ -73,18 +73,27 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
   }
 
   getBody() {
-    if (showLoadingDialog()) {
+//    if (showLoadingDialog()) {
+//      return getProgressDialog();
+//    } else {
+//      Widget listView = getListView();
+//      return new Container(
+//        padding: new EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+//        child: new RefreshIndicator(child: listView, onRefresh: pullToRefresh),
+//      );
+//    }
+    if (listData == null) {
       return getProgressDialog();
     } else {
       Widget listView = getListView();
-      return new Container(
-        padding: new EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-        child: new RefreshIndicator(child: listView, onRefresh: pullToRefresh),
-      );
+      return new RefreshIndicator(
+        key: _refreshIndicatorKey,
+          child: listView, onRefresh: pullToRefresh);
     }
   }
 
   getProgressDialog() {
+    // CircularProgressIndicator是一个圆形的Loading进度条
     return new Center(child: new CircularProgressIndicator());
   }
 
@@ -192,75 +201,73 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
         });
   }
 
-  void getDatas(bool flag) async {
-    List<Data> datas;
-    String user_key = "e66f2652b0-NDlmNDhmOT";
-    var now = new DateTime.now();
-    String time = now.millisecondsSinceEpoch.toString();
-    String secret_key = "llNjZmMjY1MmIwNT-58ba0f5e5a49f48";
-    String md5_str = StringToMd5(user_key + time + secret_key);
-    String source_id = "2358538";
+  void getDatas(bool isLoadMore) async {
+//    List<Data> datas;
     String query;
-    if (!flag) {
-      query =
-          "source(limit: 10,sort:\"desc\"),{data{}, page_info{has_next_page, end_cursor}}";
+    if (!isLoadMore) {
+      query ="source(limit: 10,sort:\"desc\"),{data{}, page_info{has_next_page, end_cursor}}";
     } else {
-      query =
-          "source(limit: 10,__id:{gte:${lastone_id},lte:${lastone_id + 10}},sort:\"desc\"),{data{}, page_info{has_next_page, end_cursor}}";
+      query = "source(limit: 10,__id:{gte:${lastone_id},lte:${lastone_id + 10}},sort:\"desc\"),{data{}, page_info{has_next_page, end_cursor}}";
     }
-    String url = "https://graphql.shenjian.io/?user_key=" +
-        user_key +
-        "&timestamp=" +
-        time +
-        "&sign=" +
-        md5_str +
-        "&source_id=" +
-        source_id +
-        "&query=" +
-        query;
+    String url=GetFinanceNewsUrl(query);
     print("请求的url===》" + url);
     Dio dio = new Dio();
     Response response = await dio.get(url);
     var jsonString = response.data;
     print("jsonString==>" + jsonString.toString());
-    try {
+//    try {
       var news = new news_enity.fromJson(jsonString);
       var code = news.code;
       if (code == 0) {
         Result result = news.result;
-        if (!flag) {
+        setState(() {
+          if (!isLoadMore) {
+            // 不是加载更多，则直接为变量赋值
 //          datas.clear();
-          datas = result.data;
-        } else {
-          datas.addAll(result.data);
-        }
+            listData = result.data;
+          } else {
+            // 是加载更多，则需要将取到的news数据追加到原来的数据后面
+            List list1 = new List();
+            list1.addAll(listData);
+            list1.addAll(result.data);
+            // 判断是否获取了所有的数据，如果是，则需要显示底部的"我也是有底线的"布局
+            if (list1.length >= listTotalSize) {
+              list1.add("COMPLETE");
+            }
+          }
+        });
         lastone_id = result.pageInfo.endCursor;
         has_next_page = result.pageInfo.hasNextPage;
+        Fluttertoast.showToast(
+            msg: "请求成功",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIos: 1,bgcolor: "#OOOOOO",textcolor: '#ffffff'
+        );
+      }else{
+        Fluttertoast.showToast(
+            msg: news.error_info,
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIos: 1,bgcolor: "#OOOOOO",textcolor: '#ffffff'
+        );
       }
-      print("数据datas==》" + datas.toString());
-      Fluttertoast.showToast(
-          msg: "请求成功",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIos: 1,bgcolor: "#OOOOOO",textcolor: '#ffffff'
-      );
-    } catch (e) {
-      Fluttertoast.showToast(
-          msg: "异常："+datas.toString(),
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIos: 1,bgcolor: "#e74c3c",textcolor: '#ffffff'
-      );
-      print("异常==》" + e.toString());
-    }
-    loaded = true;
-    setState(() {
-      listData = datas;
-    });
+
+//    } catch (e) {
+//      Fluttertoast.showToast(
+//          msg: "异常："+e.toString(),
+//          toastLength: Toast.LENGTH_SHORT,
+//          gravity: ToastGravity.BOTTOM,
+//          timeInSecForIos: 1,bgcolor: "#e74c3c",textcolor: '#ffffff'
+//      );
+//      print("异常==》" + e.toString());
+//    }
+//    loaded = true;
+
   }
 
   getImage(int i) {
-    print("加载图片getImage==》" + i.toString());
+//    print("加载图片getImage==》" + i.toString());
     String img_url = listData[i].articleThumbnail;
     return new CachedNetworkImage(
       imageUrl: img_url,
@@ -289,12 +296,15 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
     print("列表点击==》" + i.toString());
   }
 
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+  new GlobalKey<RefreshIndicatorState>();
   /**
    *下拉刷新
    */
-  Future<Null> pullToRefresh() {
-    lastone_id = 1;
+  Future<Null> pullToRefresh() async{
+    lastone_id = 0;
     getDatas(false);
+    print("刷新完成--------");
     return null;
   }
 

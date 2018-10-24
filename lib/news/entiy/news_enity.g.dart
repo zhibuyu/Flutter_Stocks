@@ -11,11 +11,16 @@ news_enity _$news_enityFromJson(Map<String, dynamic> json) {
       json['code'] as int,
       json['result'] == null
           ? null
-          : Result.fromJson(json['result'] as Map<String, dynamic>));
+          : Result.fromJson(json['result'] as Map<String, dynamic>))
+    ..error_info = json['error_info'] as String;
 }
 
 Map<String, dynamic> _$news_enityToJson(news_enity instance) =>
-    <String, dynamic>{'code': instance.code, 'result': instance.result};
+    <String, dynamic>{
+      'code': instance.code,
+      'error_info': instance.error_info,
+      'result': instance.result
+    };
 
 Result _$ResultFromJson(Map<String, dynamic> json) {
   return Result(
