@@ -58,11 +58,6 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
     }
   }
 
-  getProgressDialog() {
-    // CircularProgressIndicator是一个圆形的Loading进度条
-    return new Center(child: new CircularProgressIndicator());
-  }
-
   @override
   Widget build(BuildContext context) {
     return new Center(
