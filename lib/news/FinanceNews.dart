@@ -33,6 +33,7 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
   int lastone_id_end = 0;
   bool has_next_page = true;
 
+  bool loaded;//是否已加载数据
   @override
   void initState() {
     super.initState();
@@ -41,8 +42,14 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
 
   getBody() {
     if (listData.isEmpty) {
-      // 加载菊花
-      return CircularProgressIndicator();
+      if(loaded==false){
+        // 加载菊花
+        return CircularProgressIndicator();
+      }else{
+        return new Container(
+            child: new Text("暂无数据"),
+        );
+      }
     } else {
       return new Refresh(
           onFooterRefresh: onFooterRefresh,
@@ -274,12 +281,16 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
             listData = list1;
           }
           // 判断是否获取了所有的数据，如果是，则需要显示底部的"我也是有底线的"布局
-          if (has_next_page == false) {
+          if (has_next_page == false&&"endline"!= listData[listData.length].type) {
             ListEnity listEnity = new ListEnity("endline", null);
             listData.add(listEnity);
           }
+          loaded=true;
         });
       } else {
+        setState(() {
+          loaded=true;
+        });
         Fluttertoast.showToast(
             msg: news.error_info,
             toastLength: Toast.LENGTH_SHORT,
@@ -289,13 +300,9 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
             textcolor: '#ffffff');
       }
     } catch (e) {
-      Fluttertoast.showToast(
-          msg: "异常：" + e.toString(),
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIos: 1,
-          bgcolor: "#e74c3c",
-          textcolor: '#ffffff');
+      setState(() {
+        loaded=true;
+      });
       print("异常==》" + e.toString());
     }
   }
