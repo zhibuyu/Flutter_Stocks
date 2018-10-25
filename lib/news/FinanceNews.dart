@@ -27,7 +27,7 @@ class FinanceNewsPage extends StatefulWidget {
 }
 
 class FinanceNewsPageState extends State<FinanceNewsPage> {
-  List<ListEnity> listData = new List();
+  List<ListEnity> listData = [];
   int lastone_id;
   int lastone_id_start = 0;
   int lastone_id_end = 0;
@@ -41,13 +41,20 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
 
   getBody() {
     if (listData.isEmpty) {
-      return getProgressDialog();
+      // 加载菊花
+      return CircularProgressIndicator();
     } else {
-      Widget listView = getListView();
       return new Refresh(
           onFooterRefresh: onFooterRefresh,
           onHeaderRefresh: pullToRefresh,
-          child: listView);
+          child: ListView.builder(
+            itemCount: (listData == null) ? 0 : listData.length,
+            itemBuilder: (BuildContext context, int position) {
+              return getItem(position);
+            },
+            physics: new AlwaysScrollableScrollPhysics(),
+            shrinkWrap: true,
+          ));
     }
   }
 
@@ -63,19 +70,11 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
     );
   }
 
-  ListView getListView() => new ListView.builder(
-        itemCount: (listData == null) ? 0 : listData.length,
-        itemBuilder: (BuildContext context, int position) {
-          return getRow(position);
-        },
-        physics: new AlwaysScrollableScrollPhysics(),
-        shrinkWrap: true,
-      );
 
   /**
    * 列表item
    */
-  Widget getRow(int i) {
+  Widget getItem(int i) {
     print("加载列表getRow==》" + i.toString());
     Data data = listData[i].data;
     String type = listData[i].type;
@@ -162,11 +161,10 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
     } else {
       print("加载底线");
       return new Container(
-         height: 50.0,
+        height: 50.0,
         child: new Text(
           "——   我也是有底线的   ——",
-          style: new TextStyle(fontSize: 16.0,color: Colors.black38),
-
+          style: new TextStyle(fontSize: 16.0, color: Colors.black38),
         ),
         alignment: FractionalOffset.center,
       );
