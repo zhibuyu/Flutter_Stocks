@@ -104,14 +104,14 @@ class CustomInactiveIcon extends StatelessWidget {
   }
 }
 
-class BottomNavigationDemo extends StatefulWidget {
+class home extends StatefulWidget {
   static const String routeName = '/material/bottom_navigation';
 
   @override
-  BottomNavigationDemoState createState() => BottomNavigationDemoState();
+  homeState createState() => homeState();
 }
 
-class BottomNavigationDemoState extends State<BottomNavigationDemo>
+class homeState extends State<home>
     with TickerProviderStateMixin {
   int currentIndex = 0;
   BottomNavigationBarType type = BottomNavigationBarType.shifting;

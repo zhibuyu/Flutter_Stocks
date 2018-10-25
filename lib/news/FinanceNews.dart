@@ -210,10 +210,8 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
    * 列表中图片加载
    */
   getImage(String img_url) {
-//    print("img_url==》" + img_url);
     return new CachedNetworkImage(
       imageUrl: img_url,
-//      placeholder: new CircularProgressIndicator(),
       errorWidget: new Icon(Icons.error),
       fit: BoxFit.cover,
       height: 85.0,

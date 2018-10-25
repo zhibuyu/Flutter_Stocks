@@ -111,6 +111,4 @@ class NewsWebPageState extends State<NewsWebPage>{
     flutterWebViewPlugin.dispose();
     super.dispose();
   }
-
-
 }

@@ -9,15 +9,15 @@ class SplashPage extends StatefulWidget {
 
 class SplashState extends State<SplashPage> {
 
-  Timer _t;
+  Timer timer;
 
   @override
   void initState() {
     super.initState();
-    _t = new Timer(const Duration(milliseconds: 1500), () {
+    timer = new Timer(const Duration(milliseconds: 1500), () {
       try {
         Navigator.of(context).pushAndRemoveUntil(new MaterialPageRoute(
-            builder: (BuildContext context) => new BottomNavigationDemo()), (
+            builder: (BuildContext context) => new home()), (//跳转到主页
             Route route) => route == null);
       } catch (e) {
 
@@ -27,7 +27,7 @@ class SplashState extends State<SplashPage> {
 
   @override
   void dispose() {
-    _t.cancel();
+    timer.cancel();
     super.dispose();
   }
 
