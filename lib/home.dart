@@ -3,10 +3,11 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:mystocks/Market/MarketPage.dart';
+import 'package:mystocks/StockComments/StockCommentsPage.dart';
 import 'package:mystocks/news/FinanceNews.dart';
-import 'package:mystocks/pages/DiscoveryPage.dart';
 import 'package:mystocks/pages/MyInfoPage.dart';
-import 'package:mystocks/pages/TweetsListPage.dart';
+import 'package:mystocks/pages/TestPage.dart';
 
 class NavigationIconView {
   NavigationIconView({
@@ -15,9 +16,9 @@ class NavigationIconView {
     String title,
     Color color,
     TickerProvider vsync,
-  }) : _icon = icon,
-       _color = color,
-       _title = title,
+  }) : icon = icon,
+       color = color,
+       title = title,
        item = BottomNavigationBarItem(
          icon: icon,
          activeIcon: activeIcon,
@@ -28,22 +29,22 @@ class NavigationIconView {
          duration: kThemeAnimationDuration,
          vsync: vsync,
        ) {
-    _animation = controller.drive(CurveTween(
+    animation = controller.drive(CurveTween(
       curve: const Interval(0.5, 1.0, curve: Curves.fastOutSlowIn),
     ));
   }
 
-  final Widget _icon;
-  final Color _color;
-  final String _title;
+  final Widget icon;
+  final Color color;
+  final String title;
   final BottomNavigationBarItem item;
   final AnimationController controller;
-  Animation<double> _animation;
+  Animation<double> animation;
 
   FadeTransition transition(BottomNavigationBarType type, BuildContext context) {
     Color iconColor;
     if (type == BottomNavigationBarType.shifting) {
-      iconColor = _color;
+      iconColor = color;
     } else {
       final ThemeData themeData = Theme.of(context);
       iconColor = themeData.brightness == Brightness.light
@@ -52,9 +53,9 @@ class NavigationIconView {
     }
 
     return FadeTransition(
-      opacity: _animation,
+      opacity: animation,
       child: SlideTransition(
-        position: _animation.drive(
+        position: animation.drive(
           Tween<Offset>(
             begin: const Offset(0.0, 0.02), // Slightly down.
             end: Offset.zero,
@@ -66,8 +67,8 @@ class NavigationIconView {
             size: 120.0,
           ),
           child: Semantics(
-            label: 'Placeholder for $_title tab',
-            child: _icon,
+            label: 'Placeholder for $title tab',
+            child: icon,
           ),
         ),
       ),
@@ -107,20 +108,20 @@ class BottomNavigationDemo extends StatefulWidget {
   static const String routeName = '/material/bottom_navigation';
 
   @override
-  _BottomNavigationDemoState createState() => _BottomNavigationDemoState();
+  BottomNavigationDemoState createState() => BottomNavigationDemoState();
 }
 
-class _BottomNavigationDemoState extends State<BottomNavigationDemo>
+class BottomNavigationDemoState extends State<BottomNavigationDemo>
     with TickerProviderStateMixin {
-  int _currentIndex = 0;
-  BottomNavigationBarType _type = BottomNavigationBarType.shifting;
-  List<NavigationIconView> _navigationViews;
-  var _body;
+  int currentIndex = 0;
+  BottomNavigationBarType type = BottomNavigationBarType.shifting;
+  List<NavigationIconView> navigationViews;
+  var body;
 
   @override
   void initState() {
     super.initState();
-    _navigationViews = <NavigationIconView>[
+    navigationViews = <NavigationIconView>[
       NavigationIconView(
         icon: const Icon(Icons.access_alarm),
         title: '新闻',
@@ -130,7 +131,7 @@ class _BottomNavigationDemoState extends State<BottomNavigationDemo>
       NavigationIconView(
         activeIcon: CustomIcon(),
         icon: CustomInactiveIcon(),
-        title: '自选',
+        title: '股票评论',
         color: Colors.deepOrange,
         vsync: this,
       ),
@@ -144,7 +145,7 @@ class _BottomNavigationDemoState extends State<BottomNavigationDemo>
       NavigationIconView(
         activeIcon: const Icon(Icons.favorite),
         icon: const Icon(Icons.favorite_border),
-        title: '大单交易',
+        title: '暂空',
         color: Colors.indigo,
         vsync: this,
       ),
@@ -156,64 +157,53 @@ class _BottomNavigationDemoState extends State<BottomNavigationDemo>
       )
     ];
 
-    _body = new IndexedStack(
-      children: <Widget>[
-        new FinanceNewsPage(),
-        new TweetsListPage(),
-        new DiscoveryPage(),
-        new MyInfoPage()
-      ],
-      index: _currentIndex,
-    );
-    for (NavigationIconView view in _navigationViews)
-      view.controller.addListener(_rebuild);
 
-    _navigationViews[_currentIndex].controller.value = 1.0;
+    for (NavigationIconView view in navigationViews)
+      view.controller.addListener(rebuild);
+
+    navigationViews[currentIndex].controller.value = 1.0;
   }
 
   @override
   void dispose() {
-    for (NavigationIconView view in _navigationViews)
+    for (NavigationIconView view in navigationViews)
       view.controller.dispose();
     super.dispose();
   }
 
-  void _rebuild() {
+  void rebuild() {
     setState(() {
       // Rebuild in order to animate views.
     });
   }
 
-  Widget _buildTransitionsStack() {
-    final List<FadeTransition> transitions = <FadeTransition>[];
-    for (NavigationIconView view in _navigationViews)
-      transitions.add(view.transition(_type, context));
 
-    // We want to have the newly animating (fading in) views on top.
-    transitions.sort((FadeTransition a, FadeTransition b) {
-      final Animation<double> aAnimation = a.opacity;
-      final Animation<double> bAnimation = b.opacity;
-      final double aValue = aAnimation.value;
-      final double bValue = bAnimation.value;
-      return aValue.compareTo(bValue);
-    });
-
-    return Stack(children: transitions);
+  void initData() {
+    body=new IndexedStack(
+      children: <Widget>[
+        new FinanceNewsPage(),
+        new StockCommentsPage(),
+        new MarketPage(),
+        new TestPage(),
+        new MyInfoPage()
+      ],
+      index: currentIndex,
+    );
   }
-
   @override
   Widget build(BuildContext context) {
+    initData();
     final BottomNavigationBar botNavBar = BottomNavigationBar(
-      items: _navigationViews
+      items: navigationViews
           .map((NavigationIconView navigationView) => navigationView.item)
           .toList(),
-      currentIndex: _currentIndex,
-      type: _type,
+      currentIndex: currentIndex,
+      type: type,
       onTap: (int index) {
         setState(() {
-          _navigationViews[_currentIndex].controller.reverse();
-          _currentIndex = index;
-          _navigationViews[_currentIndex].controller.forward();
+          navigationViews[currentIndex].controller.reverse();
+          currentIndex = index;
+          navigationViews[currentIndex].controller.forward();
         });
       },
     );
@@ -225,7 +215,7 @@ class _BottomNavigationDemoState extends State<BottomNavigationDemo>
           PopupMenuButton<BottomNavigationBarType>(
             onSelected: (BottomNavigationBarType value) {
               setState(() {
-                _type = value;
+                type = value;
               });
             },
             itemBuilder: (BuildContext context) => <PopupMenuItem<BottomNavigationBarType>>[
@@ -241,11 +231,9 @@ class _BottomNavigationDemoState extends State<BottomNavigationDemo>
           )
         ],
       ),
-//      body: Center(
-//        child: _buildTransitionsStack()
-//      ),
-      body: _body,
+      body:body,
       bottomNavigationBar: botNavBar,
     );
   }
+
 }
