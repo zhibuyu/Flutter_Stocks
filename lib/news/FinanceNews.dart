@@ -184,9 +184,11 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
         }
         query =
             "source(limit: 20,__id:{gte:${lastone_id_start},lte:${lastone_id_end}},sort:\"desc\"),{data{}, page_info{has_next_page, end_cursor}}";
+      }else{
+        query="";
       }
     }
-    if (query.isNotEmpty) {
+    if (query!=null&&query.isNotEmpty) {
       String url = GetFinanceNewsUrl(query);
       print("请求的url===》" + url);
       Dio dio = new Dio();
