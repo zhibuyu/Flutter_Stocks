@@ -32,8 +32,6 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
   int lastone_id_start = 0;
   int lastone_id_end = 0;
   bool has_next_page = true;
-
-  bool loaded;//是否已加载数据
   @override
   void initState() {
     super.initState();
@@ -42,14 +40,8 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
 
   getBody() {
     if (listData.isEmpty) {
-      if(loaded==false){
-        // 加载菊花
-        return CircularProgressIndicator();
-      }else{
-        return new Container(
-            child: new Text("暂无数据"),
-        );
-      }
+      // 加载菊花
+      return CircularProgressIndicator();
     } else {
       return new Refresh(
           onFooterRefresh: onFooterRefresh,
@@ -285,12 +277,8 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
             ListEnity listEnity = new ListEnity("endline", null);
             listData.add(listEnity);
           }
-          loaded=true;
         });
       } else {
-        setState(() {
-          loaded=true;
-        });
         Fluttertoast.showToast(
             msg: news.error_info,
             toastLength: Toast.LENGTH_SHORT,
@@ -300,9 +288,6 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
             textcolor: '#ffffff');
       }
     } catch (e) {
-      setState(() {
-        loaded=true;
-      });
       print("异常==》" + e.toString());
     }
   }
