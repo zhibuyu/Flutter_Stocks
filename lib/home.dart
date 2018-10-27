@@ -24,11 +24,6 @@ class homeState extends State<home> with TickerProviderStateMixin {
   List<NavigationIconView> navigationViews;
   var body;
   List<Widget> Pages = [];
-  FinanceNewsPage financeNewsPage;
-  StockCommentsPage stockCommentsPage;
-  MarketPage marketPage ;
-  TestPage testPage ;
-  MyInfoPage myInfoPage = new MyInfoPage();
 
   @override
   void initState() {
@@ -88,9 +83,14 @@ class homeState extends State<home> with TickerProviderStateMixin {
   }
 
   void initData() {
-    slelectTabIndex(0);
     body = new IndexedStack(
-      children: Pages,
+      children: [
+        new FinanceNewsPage(),
+        new StockCommentsPage(),
+        new MarketPage(),
+        new TestPage(),
+        new MyInfoPage()
+      ],
       index: currentIndex,
     );
   }
@@ -105,7 +105,6 @@ class homeState extends State<home> with TickerProviderStateMixin {
       currentIndex: currentIndex,
       type: type,
       onTap: (int index) {
-        slelectTabIndex(index);
         setState(() {
           navigationViews[currentIndex].controller.reverse();
           currentIndex = index;
@@ -144,54 +143,5 @@ class homeState extends State<home> with TickerProviderStateMixin {
       body: body,
       bottomNavigationBar: botNavBar,
     );
-  }
-
-  /**
-   * 选中后才去new
-   */
-  void slelectTabIndex(int index) {
-    switch(index){
-      case 1:
-        if(stockCommentsPage==null){
-          stockCommentsPage = new StockCommentsPage();
-        }
-        if(!Pages.contains(stockCommentsPage)){
-          Pages.add(stockCommentsPage);
-        }
-        break;
-      case 2:
-        if(marketPage==null){
-          marketPage = new MarketPage();
-        }
-        if(!Pages.contains(marketPage)){
-          Pages.add(marketPage);
-        }
-        break;
-      case 3:
-        if(testPage==null){
-          testPage= new TestPage();
-        }
-        if(!Pages.contains(testPage)){
-          Pages.add(testPage);
-        }
-        break;
-      case 4:
-        if(myInfoPage==null){
-          myInfoPage = new MyInfoPage();
-        }
-        if(!Pages.contains(myInfoPage)){
-          Pages.add(myInfoPage);
-        }
-        break;
-      case 0:
-      default:
-        if(financeNewsPage==null){
-          financeNewsPage = new FinanceNewsPage();
-        }
-        if(!Pages.contains(financeNewsPage)){
-          Pages.add(financeNewsPage);
-        }
-        break;
-    }
   }
 }
