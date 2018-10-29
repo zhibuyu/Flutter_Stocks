@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:mystocks/Market/StockDetails.dart';
 import 'package:mystocks/Market/enity/Stock.dart';
 import 'package:http/http.dart' as http;
 import 'package:gbk2utf8/gbk2utf8.dart';
@@ -84,6 +85,7 @@ class MarketPageState extends State<MarketPage> {
   void DealStocks(String str, Stock stock) {
     int start = str.indexOf("\"") + 1;
     int end = str.indexOf("\"", start);
+    stock.stock_code2= str.substring(str.indexOf("str_") + 4, start - 2);
     stock.stock_code = str.substring(str.indexOf("str_") + 6, start - 2);
     String stock_str = str.substring(start, end);
     List stock_item = stock_str.split(",");
@@ -289,7 +291,16 @@ class MarketPageState extends State<MarketPage> {
           ),
         ),
       ),
-      onTap: () {},
+      onTap: () {
+        onItimeClick(stock);
+      },
     );
+  }
+
+  /**
+   * 列表点击
+   */
+  void onItimeClick(Stock stock) {
+    Navigator.push(context, new MaterialPageRoute(builder: (context)=> new StockDetails(stock)));
   }
 }
