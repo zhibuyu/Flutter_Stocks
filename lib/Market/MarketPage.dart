@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mystocks/Market/enity/Stock.dart';
 import 'package:http/http.dart' as http;
 import 'package:gbk2utf8/gbk2utf8.dart';
+import 'package:mystocks/Util/ComputeUtil.dart';
 
 /**
  * @Description  行情界面
@@ -33,7 +34,9 @@ class MarketPageState extends State<MarketPage> {
 
   void getDatas() {
     String url =
-        "http://hq.sinajs.cn/list=sh601003,sh601001,sz002242,sz002230,sh603456,sz002736,sh600570";
+        "http://hq.sinajs.cn/list=sh601003,sh601001,sz002242,sz002230,sh603456,sz002736,sh600570,sz300104,sz000416,"
+        "sh600519,sz000001,sh601857,sz000333,sz000002,sz000651,sz002415,sz000651,sz300033,sz000418,sz000003,sz000005,"
+        "sz000006,sz000007,sz000008,sz000009,sz000010,sz000011,sz000012,sz000013,sz000014,sz000015,sz000016,sz000017";
     fetch(url).then((data) {
       setState(() {
         List<String> stockstrs = data.split(";");
@@ -131,6 +134,10 @@ class MarketPageState extends State<MarketPage> {
 
   getItem(int position) {
     Stock stock = stocks[position];
+    double yesterday_close=double.parse(stock.yesterday_close);
+    double current_prices=double.parse(stock.current_prices);
+    double today_open=double.parse(stock.today_open);
+    double gains=ComputeGains(yesterday_close,current_prices,today_open);
     return new GestureDetector(
         child: new Card(
           child: new Padding(
@@ -170,19 +177,36 @@ class MarketPageState extends State<MarketPage> {
                   flex: 2,
                 ),
                 new Expanded(
-                  child: new Container(
-                    color: Colors.red,
-                    padding: new EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
-                    child: new Text("+10.00%", style: new TextStyle(fontSize: 18.0),
-                    ),
-                    alignment: FractionalOffset.center,
-                  ),
+                  child: ShowGains(gains),
                   flex:1,
                 )
               ],
             ),),
         ),
       onTap: () {},
+    );
+  }
+
+  /**
+   *显示涨幅
+   */
+  ShowGains(double gains) {
+    Color show_color;
+    String gains_str=(gains*100).toStringAsFixed(2)+"%";
+    if(gains>0){
+      show_color=Colors.red;
+      gains_str="+"+gains_str;
+    }else if(gains<0){
+      show_color=Colors.green;
+    }else{
+      show_color=Colors.black38;
+    }
+    return new Container(
+      color:show_color,
+      padding: new EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
+      child: new Text(gains_str, style: new TextStyle(fontSize: 18.0,color: Colors.white),
+      ),
+      alignment: FractionalOffset.center,
     );
   }
 }
