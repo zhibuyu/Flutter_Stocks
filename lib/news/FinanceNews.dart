@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:mystocks/Util/Constants.dart';
 import 'package:mystocks/Util/StringUtil.dart';
 import 'package:mystocks/Util/TimeUtils.dart';
 import 'package:mystocks/news/NewsWebPage.dart';
@@ -35,7 +36,7 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
   @override
   void initState() {
     super.initState();
-    getDatas(false);
+    getDatas(START_REQUEST);
   }
 
   getBody() {
@@ -169,9 +170,9 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
    * 请求数据
    * isLoadMore 是否为加载更多
    */
-  void getDatas(bool isLoadMore) async {
+  void getDatas(int request_type) async {
     String query;
-    if (!isLoadMore) {
+    if (request_type!=LOADMORE_REQIEST) {
       query =
           "source(limit: 20,sort:\"desc\"),{data{}, page_info{has_next_page, end_cursor}}";
     } else {
@@ -193,7 +194,7 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
       Dio dio = new Dio();
       Response response = await dio.get(url);
       var jsonString = response.data;
-      DealDatas(jsonString, isLoadMore);
+      DealDatas(jsonString, request_type);
     } else {
       Fluttertoast.showToast(
           msg: "已经没有更多了",
@@ -236,18 +237,18 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
    *下拉刷新
    */
   Future<Null> pullToRefresh() async {
-    getDatas(false);
+    getDatas(REFRESH_REQIEST);
     return null;
   }
 
   Future<Null> onFooterRefresh() async {
-    getDatas(true);
+    getDatas(LOADMORE_REQIEST);
   }
 
   /**
    * 处理请求到的数据
    */
-  void DealDatas(jsonString, bool isLoadMore) {
+  void DealDatas(jsonString, int request_type) {
     try {
       var news = new news_enity.fromJson(jsonString);
       var code = news.code;
@@ -256,7 +257,7 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
         lastone_id = result.pageInfo.endCursor;
         has_next_page = result.pageInfo.hasNextPage;
         setState(() {
-          if (!isLoadMore) {
+          if (request_type!=LOADMORE_REQIEST) {
             // 不是加载更多，则直接为变量赋值
             for (Data data in result.data) {
               ListEnity listEnity = new ListEnity("main", data);
@@ -276,6 +277,15 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
           if (has_next_page == false&&"endline"!= listData[listData.length].type) {
             ListEnity listEnity = new ListEnity("endline", null);
             listData.add(listEnity);
+          }
+          if(request_type==REFRESH_REQIEST){
+            Fluttertoast.showToast(
+                msg: "刷新成功",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIos: 1,
+                bgcolor: "#OOOOOO",
+                textcolor: '#ffffff');
           }
         });
       } else {
