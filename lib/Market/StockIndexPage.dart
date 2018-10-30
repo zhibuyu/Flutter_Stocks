@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:gbk2utf8/gbk2utf8.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:mystocks/Market/StockDetails.dart';
 import 'package:mystocks/Market/enity/StockIndex.dart';
 import 'package:mystocks/Util/Constants.dart';
+import 'package:mystocks/news/entiy/ListEnity.dart';
 
 /**
  * @Description  指数
@@ -128,59 +130,63 @@ class StockIndexPageState extends State<StockIndexPage> {
         show_color = Colors.green;
       }
     }
-    return Card(
-      
-      child:  Container(
-        padding: new EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: Text(
-                stockIndex.name,
-                style: new TextStyle(fontSize: 18.0, color: Colors.black),
-                textAlign: TextAlign.center,
-              ) ,
-              flex: 1,
-            ),
-            Expanded(
-              child:new Text(
-                stockIndex.current_points,
-                style: new TextStyle(fontSize: 22.0, color: show_color),
-                textAlign: TextAlign.center,
-              ) ,
-              flex: 1,
-            ),
-            Expanded(
-              child:            Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Container(
-                      child:Text(
-                        stockIndex.current_prices,
-                        style: new TextStyle(fontSize: 14.0, color: show_color),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    flex: 1,
-                  ),
-                  Expanded(
-                    child: Container(
-                      child:Text(
-                        change_prefix+gains_rate,
-                        style: new TextStyle(fontSize: 14.0, color: show_color),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    flex: 1,
-                  )
-                ],
+    return new GestureDetector(
+      child:  Card(
+        child:  Container(
+          padding: new EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                child: Text(
+                  stockIndex.name,
+                  style: new TextStyle(fontSize: 18.0, color: Colors.black),
+                  textAlign: TextAlign.center,
+                ) ,
+                flex: 1,
               ),
-              flex: 1,
-            )
-          ],
+              Expanded(
+                child:new Text(
+                  stockIndex.current_points,
+                  style: new TextStyle(fontSize: 22.0, color: show_color),
+                  textAlign: TextAlign.center,
+                ) ,
+                flex: 1,
+              ),
+              Expanded(
+                child:  Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Container(
+                        child:Text(
+                          stockIndex.current_prices,
+                          style: new TextStyle(fontSize: 12.0, color: show_color),
+                        ),
+                        alignment: FractionalOffset.centerLeft,
+                      ),
+                      flex: 1,
+                    ),
+                    Expanded(
+                      child: Container(
+                        child:Text(
+                          change_prefix+gains_rate+"%",
+                          style: new TextStyle(fontSize: 12.0, color: show_color),
+                        ),
+                        alignment: FractionalOffset.centerRight,
+                      ),
+                      flex: 1,
+                    )
+                  ],
+                ),
+                flex: 1,
+              )
+            ],
+          ),
         ),
-      ),
+      ),onTap: (){
+      onItimeClick(stockIndex);
+    },
     )
+
     ;
   }
 
@@ -190,7 +196,8 @@ class StockIndexPageState extends State<StockIndexPage> {
   void DealStockIndess(String str, StockIndex stockIndex) {
     int start = str.indexOf("\"") + 1;
     int end = str.indexOf("\"", start);
-    stockIndex.stock_code= str.substring(str.indexOf("str_") + 4, start - 2);
+    stockIndex.stock_code2= str.substring(str.indexOf("_s_") + 3, start - 2);
+    stockIndex.stock_code= str.substring(str.indexOf("_s_") + 5, start - 2);
     String stock_index_str = str.substring(start, end);
     List index_item = stock_index_str.split(",");
     stockIndex.name=index_item[0];
@@ -199,5 +206,12 @@ class StockIndexPageState extends State<StockIndexPage> {
     stockIndex.gains_rate=index_item[3];
     stockIndex.traded_num=index_item[4];
     stockIndex.traded_amount=index_item[5];
+  }
+
+  /**
+   * item点击
+   */
+  void onItimeClick(StockIndex stockIndex) {
+    Navigator.push(context, new MaterialPageRoute(builder: (context)=> new StockDetails(ListEnity("index",stockIndex))));
   }
 }

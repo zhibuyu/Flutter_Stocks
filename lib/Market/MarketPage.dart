@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:gbk2utf8/gbk2utf8.dart';
 import 'package:mystocks/Util/ComputeUtil.dart';
 import 'package:mystocks/Util/Constants.dart';
+import 'package:mystocks/news/entiy/ListEnity.dart';
 
 /**
  * @Description  行情界面
@@ -302,6 +303,6 @@ class MarketPageState extends State<MarketPage> {
    * 列表点击
    */
   void onItimeClick(Stock stock) {
-    Navigator.push(context, new MaterialPageRoute(builder: (context)=> new StockDetails(stock)));
+    Navigator.push(context, new MaterialPageRoute(builder: (context)=> new StockDetails(ListEnity("stock",stock))));
   }
 }

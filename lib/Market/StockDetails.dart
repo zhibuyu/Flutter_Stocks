@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mystocks/Market/enity/Stock.dart';
+import 'package:mystocks/Market/enity/StockIndex.dart';
 import 'package:mystocks/Util/ComputeUtil.dart';
+import 'package:mystocks/news/entiy/ListEnity.dart';
 
 /**
  * @Description  个股详情
@@ -18,19 +20,19 @@ class _Page {
 }
 
 class StockDetails extends StatefulWidget {
-  Stock stock;
+  ListEnity enity;
 
-  StockDetails(this.stock);
+  StockDetails(this.enity);
 
   @override
-  State<StatefulWidget> createState() => new StockDetailsState(stock);
+  State<StatefulWidget> createState() => new StockDetailsState(enity);
 }
 
 class StockDetailsState extends State<StockDetails>
     with SingleTickerProviderStateMixin {
   TabController _controller;
 
-  Stock stock;
+  ListEnity enity;
   List<_Page> _allPages = [];
   _Page _selectedPage;
 
@@ -41,27 +43,38 @@ class StockDetailsState extends State<StockDetails>
       yesterday_close,
       current_prices,
       today_open;
-
-  StockDetailsState(this.stock);
+  String type,stock_code2,stock_code,stock_name;
+  StockDetailsState(this.enity);
 
   @override
   void initState() {
+     type =enity.type;
+     if("stock"==type){
+       Stock stock=enity.data;
+       stock_name=stock.name;
+       stock_code=stock.stock_code;
+       stock_code2=stock.stock_code2;
+       traded_num = double.parse(stock.traded_num);
+       traded_amount = double.parse(stock.traded_amount);
+       gains = stock.gains;
+
+       yesterday_close = double.parse(stock.yesterday_close);
+       current_prices = double.parse(stock.current_prices);
+       today_open = double.parse(stock.today_open);
+     }else{
+       StockIndex stockIndex=enity.data;
+       stock_name=stockIndex.name;
+       stock_code=stockIndex.stock_code;
+       stock_code2=stockIndex.stock_code2;
+     }
     //日K线查询：
-    String daily_kimg_url = "http://image.sinajs.cn/newchart/daily/n/" +
-        stock.stock_code2.toString() +
-        ".gif";
+    String daily_kimg_url = "http://image.sinajs.cn/newchart/daily/n/" + stock_code2 +".gif";
     //分时线的查询：
-    String min_kimg_url = "http://image.sinajs.cn/newchart/min/n/" +
-        stock.stock_code2.toString() +
-        ".gif";
+    String min_kimg_url = "http://image.sinajs.cn/newchart/min/n/" +stock_code2.toString() + ".gif";
     //周K线查询：
-    String weekly_kimg_url = "http://image.sinajs.cn/newchart/weekly/n/" +
-        stock.stock_code2.toString() +
-        ".gif";
+    String weekly_kimg_url = "http://image.sinajs.cn/newchart/weekly/n/" +stock_code2.toString() +".gif";
     //月K线查询：
-    String monthly_kimg_url = "http://image.sinajs.cn/newchart/monthly/n/" +
-        stock.stock_code2.toString() +
-        ".gif";
+    String monthly_kimg_url = "http://image.sinajs.cn/newchart/monthly/n/" +stock_code2.toString() +".gif";
     _allPages = <_Page>[
       _Page("分时", min_kimg_url),
       _Page("日K", daily_kimg_url),
@@ -70,43 +83,43 @@ class StockDetailsState extends State<StockDetails>
     ];
     _controller = TabController(vsync: this, length: _allPages.length);
     _controller.addListener(_handleTabSelection);
-    _selectedPage = _allPages[0];
-    traded_num = double.parse(stock.traded_num);
-    traded_amount = double.parse(stock.traded_amount);
-    gains = stock.gains;
-
-    yesterday_close = double.parse(stock.yesterday_close);
-    current_prices = double.parse(stock.current_prices);
-    today_open = double.parse(stock.today_open);
+     _selectedPage = _allPages[0];
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return Scaffold(
-        appBar: buildAppBar(),
-        body: new Column(
-          children: <Widget>[TopMarket(), getKline()],
-        ));
+    if("stock"==type){
+      return Scaffold(
+          appBar: buildAppBar(),
+          body: new Column(
+            children:  <Widget>[
+              TopMarket(), getKline()],
+          ));
+    }else{
+      return Scaffold(
+          appBar: buildAppBar(),
+          body: new Column(
+            children:  <Widget>[
+             getKline()],
+          ));
+    }
   }
 
   buildAppBar() {
     return AppBar(
       iconTheme: new IconThemeData(color: Colors.white),
       brightness: Brightness.light,
-//      flexibleSpace: Container(
-//          decoration: BoxDecoration(
-//              border: Border(bottom: BorderSide(color: Color(0xFFD9D9D9))))),
+
       title: Container(
         margin: EdgeInsets.fromLTRB(0.0, 4.0, 0.0, 0.0),
         child: Column(
           children: <Widget>[
-            Text(stock.name,
+            Text(stock_name,
                 style: new TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.w500,
                     color: Colors.white)),
-            Text(stock.stock_code,
+            Text(stock_code,
                 style: new TextStyle(
                     fontSize: 12.0,
                     fontWeight: FontWeight.w200,
@@ -287,7 +300,6 @@ class StockDetailsState extends State<StockDetails>
    */
   ShowPrices() {
     Color show_color;
-    double gains = stock.gains;
     String gains_num =
         ComputeGainsNum(yesterday_close, current_prices, today_open);
     String gains_str = (gains * 100).toStringAsFixed(2) + "%";
