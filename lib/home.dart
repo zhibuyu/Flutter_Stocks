@@ -5,6 +5,7 @@ import 'package:mystocks/news/FinanceNews.dart';
 import 'package:mystocks/pages/MyInfoPage.dart';
 import 'package:mystocks/widget/CustomIcon.dart';
 import 'package:mystocks/widget/CustomInactiveIcon.dart';
+import 'package:mystocks/widget/MyDrawer.dart';
 import 'package:mystocks/widget/NavigationIconView.dart';
 
 /**
@@ -107,34 +108,35 @@ class homeState extends State<home> with TickerProviderStateMixin {
     );
 
     return Scaffold(
-      appBar: AppBar(
-        title: new Text(
-          '子不语股票',
-          style: new TextStyle(color: Colors.white),
+        appBar: AppBar(
+          title: new Text(
+            navigationViews[currentIndex].title,
+            style: new TextStyle(color: Colors.white),
+          ),
+          iconTheme: new IconThemeData(color: Colors.white),
+          actions: <Widget>[
+            PopupMenuButton<BottomNavigationBarType>(
+              onSelected: (BottomNavigationBarType value) {
+                setState(() {
+                  type = value;
+                });
+              },
+              itemBuilder: (BuildContext context) =>
+                  <PopupMenuItem<BottomNavigationBarType>>[
+                    const PopupMenuItem<BottomNavigationBarType>(
+                      value: BottomNavigationBarType.fixed,
+                      child: Text('Fixed'),
+                    ),
+                    const PopupMenuItem<BottomNavigationBarType>(
+                      value: BottomNavigationBarType.shifting,
+                      child: Text('Shifting'),
+                    )
+                  ],
+            )
+          ],
         ),
-        actions: <Widget>[
-          PopupMenuButton<BottomNavigationBarType>(
-            onSelected: (BottomNavigationBarType value) {
-              setState(() {
-                type = value;
-              });
-            },
-            itemBuilder: (BuildContext context) =>
-                <PopupMenuItem<BottomNavigationBarType>>[
-                  const PopupMenuItem<BottomNavigationBarType>(
-                    value: BottomNavigationBarType.fixed,
-                    child: Text('Fixed'),
-                  ),
-                  const PopupMenuItem<BottomNavigationBarType>(
-                    value: BottomNavigationBarType.shifting,
-                    child: Text('Shifting'),
-                  )
-                ],
-          )
-        ],
-      ),
-      body: body,
-      bottomNavigationBar: botNavBar,
-    );
+        body: body,
+        bottomNavigationBar: botNavBar,
+        drawer: new MyDrawer());
   }
 }
