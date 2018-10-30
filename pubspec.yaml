@@ -60,6 +60,7 @@ flutter:
     - images/ic_my_recommend.png
     - images/ic_my_team.png
     - images/ic_discover_pos.png
+    - images/ic_avatar_default.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
 
