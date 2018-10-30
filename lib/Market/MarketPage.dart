@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:mystocks/Market/StockDetails.dart';
+import 'package:mystocks/Market/StockDetailsPage.dart';
 import 'package:mystocks/Market/enity/Stock.dart';
 import 'package:http/http.dart' as http;
 import 'package:gbk2utf8/gbk2utf8.dart';
@@ -303,6 +303,6 @@ class MarketPageState extends State<MarketPage> {
    * 列表点击
    */
   void onItimeClick(Stock stock) {
-    Navigator.push(context, new MaterialPageRoute(builder: (context)=> new StockDetails(ListEnity("stock",stock))));
+    Navigator.push(context, new MaterialPageRoute(builder: (context)=> new StockDetailsPage(ListEnity("stock",stock))));
   }
 }

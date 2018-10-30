@@ -76,8 +76,8 @@ class NewsWebPageState extends State<NewsWebPage>{
   Widget build(BuildContext context) {
     List<Widget> titleContent = [];
     titleContent.add(new Text(
-//      title,
-      "新闻详情",
+      title,
+//      "新闻详情",
       style: new TextStyle(color: Colors.white),
     ));
     if (loading) {

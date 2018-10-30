@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:gbk2utf8/gbk2utf8.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:mystocks/Market/StockDetails.dart';
+import 'package:mystocks/Market/StockDetailsPage.dart';
 import 'package:mystocks/Market/enity/StockIndex.dart';
 import 'package:mystocks/Util/Constants.dart';
 import 'package:mystocks/news/entiy/ListEnity.dart';
@@ -212,6 +212,6 @@ class StockIndexPageState extends State<StockIndexPage> {
    * item点击
    */
   void onItimeClick(StockIndex stockIndex) {
-    Navigator.push(context, new MaterialPageRoute(builder: (context)=> new StockDetails(ListEnity("index",stockIndex))));
+    Navigator.push(context, new MaterialPageRoute(builder: (context)=> new StockDetailsPage(ListEnity("index",stockIndex))));
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mystocks/Login/LoginPage.dart';
+import 'package:mystocks/news/NewsWebPage.dart';
+import 'package:mystocks/widget/WechatPage.dart';
 
 /**
  * @Description  文我的界面
@@ -133,12 +135,34 @@ class MyInfoPageState extends State<MyInfoPage> {
   }
 
   _handleListItemClick(int index) {
-    Fluttertoast.showToast(
-        msg: index.toString(),
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIos: 1,
-        bgcolor: "#OOOOOO",
-        textcolor: '#ffffff');
+    switch(index){
+      case 1:
+        String h5_url = "https://blog.csdn.net/u010123643";
+        Navigator.push(
+            context,
+            new MaterialPageRoute(
+                builder: (context) => new NewsWebPage(h5_url,'我的博客')));
+        break;
+      case 2:
+        String h5_url = "https://github.com/zhibuyu";
+        Navigator.push(
+            context,
+            new MaterialPageRoute(
+                builder: (context) => new NewsWebPage(h5_url,'我的开源')));
+        break;
+      case 3:
+        Navigator.push(
+            context,
+            new MaterialPageRoute(
+                builder: (context) => new WechatPage()));
+        break;
+      case 4:
+        String h5_url = "https://github.com/zhibuyu/Flutter_Stocks/issues";
+        Navigator.push(
+            context,
+            new MaterialPageRoute(
+                builder: (context) => new NewsWebPage(h5_url,'意见反馈')));
+        break;
+    }
   }
 }

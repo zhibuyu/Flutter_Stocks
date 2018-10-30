@@ -227,7 +227,7 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
     Navigator.push(
         context,
         new MaterialPageRoute(
-            builder: (context) => new NewsWebPage(h5_url, articleTitle)));
+            builder: (context) => new NewsWebPage(h5_url,'新闻详情')));
   }
 
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =

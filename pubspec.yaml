@@ -53,6 +53,8 @@ flutter:
     - images/cover_img.jpg
     - images/ic_avatar_default.png
     - images/ic_arrow_right.png
+    - images/wechart_add.jpg
+    - images/wechat_pay.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
 

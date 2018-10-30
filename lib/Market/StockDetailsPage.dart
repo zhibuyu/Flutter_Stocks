@@ -19,16 +19,16 @@ class _Page {
   _Page(this.label, this.img_url);
 }
 
-class StockDetails extends StatefulWidget {
+class StockDetailsPage extends StatefulWidget {
   ListEnity enity;
 
-  StockDetails(this.enity);
+  StockDetailsPage(this.enity);
 
   @override
-  State<StatefulWidget> createState() => new StockDetailsState(enity);
+  State<StatefulWidget> createState() => new StockDetailsPageState(enity);
 }
 
-class StockDetailsState extends State<StockDetails>
+class StockDetailsPageState extends State<StockDetailsPage>
     with SingleTickerProviderStateMixin {
   TabController _controller;
 
@@ -44,7 +44,7 @@ class StockDetailsState extends State<StockDetails>
       current_prices,
       today_open;
   String type,stock_code2,stock_code,stock_name;
-  StockDetailsState(this.enity);
+  StockDetailsPageState(this.enity);
 
   @override
   void initState() {
@@ -109,7 +109,6 @@ class StockDetailsState extends State<StockDetails>
     return AppBar(
       iconTheme: new IconThemeData(color: Colors.white),
       brightness: Brightness.light,
-
       title: Container(
         margin: EdgeInsets.fromLTRB(0.0, 4.0, 0.0, 0.0),
         child: Column(
