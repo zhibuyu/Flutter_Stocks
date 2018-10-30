@@ -39,10 +39,13 @@ class Stock extends Object {
   var sell5; //“卖五”报价
   var date; //日期；
   var time;//时间；
+  double gains;
 
   @override
   String toString() {
-    return 'Stock{stock_code: $stock_code, stock_code2: $stock_code2, name: $name, today_open: $today_open, yesterday_close: $yesterday_close, current_prices: $current_prices, today_highest_price: $today_highest_price, today_lowest_price: $today_lowest_price, buy1_j: $buy1_j, sell1_j: $sell1_j, traded_num: $traded_num, traded_amount: $traded_amount, buy1_apply_num: $buy1_apply_num, buy1: $buy1, buy2_apply_num: $buy2_apply_num, buy2: $buy2, buy3_apply_num: $buy3_apply_num, buy3: $buy3, buy4_apply_num: $buy4_apply_num, buy4: $buy4, buy5_apply_num: $buy5_apply_num, buy5: $buy5, sell1_apply_num: $sell1_apply_num, sell1: $sell1, sell2_apply_num: $sell2_apply_num, sell2: $sell2, sell3_apply_num: $sell3_apply_num, sell3: $sell3, sell4_apply_num: $sell4_apply_num, sell4: $sell4, sell5_apply_num: $sell5_apply_num, sell5: $sell5, date: $date, time: $time}';
-  }
+    return 'Stock{stock_code: $stock_code, stock_code2: $stock_code2, name: $name, today_open: $today_open, yesterday_close: $yesterday_close, current_prices: $current_prices, today_highest_price: $today_highest_price, today_lowest_price: $today_lowest_price, buy1_j: $buy1_j, sell1_j: $sell1_j, traded_num: $traded_num, traded_amount: $traded_amount, buy1_apply_num: $buy1_apply_num, buy1: $buy1, buy2_apply_num: $buy2_apply_num, buy2: $buy2, buy3_apply_num: $buy3_apply_num, buy3: $buy3, buy4_apply_num: $buy4_apply_num, buy4: $buy4, buy5_apply_num: $buy5_apply_num, buy5: $buy5, sell1_apply_num: $sell1_apply_num, sell1: $sell1, sell2_apply_num: $sell2_apply_num, sell2: $sell2, sell3_apply_num: $sell3_apply_num, sell3: $sell3, sell4_apply_num: $sell4_apply_num, sell4: $sell4, sell5_apply_num: $sell5_apply_num, sell5: $sell5, date: $date, time: $time, gains: $gains}';
+  } //涨幅
+
+
 
 }

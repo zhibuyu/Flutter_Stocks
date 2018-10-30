@@ -237,7 +237,8 @@ class MarketPageState extends State<MarketPage> {
     double yesterday_close = double.parse(stock.yesterday_close);
     double current_prices = double.parse(stock.current_prices);
     double today_open = double.parse(stock.today_open);
-    double gains = ComputeGains(yesterday_close, current_prices, today_open);
+    double gains = ComputeGainsRate(yesterday_close, current_prices, today_open);
+    stocks[position].gains=gains;
     String current_prices_str = current_prices.toStringAsFixed(2);
     return new GestureDetector(
       child: new Card(
