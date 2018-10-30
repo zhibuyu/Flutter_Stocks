@@ -228,7 +228,7 @@ class StockDetailsState extends State<StockDetails>
                   child:   Row(
                     children: <Widget>[
                       Text(
-                        "昨   收",
+                        "昨    收",
                         style:
                         new TextStyle(fontSize: 12.0, color: Colors.black38),
                         textAlign: TextAlign.left,
