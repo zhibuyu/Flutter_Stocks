@@ -343,23 +343,7 @@ class StockDetailsState extends State<StockDetails>
     );
   }
 
-  /**
-   * k线部分
-   */
-  getListView() {
-    return ListView.builder(
-      itemCount: (StockComments == null) ? 0 : StockComments.length,
-      itemBuilder: (BuildContext context, int position) {
-        return getCommentsItem(position);
-      },
-      physics: new AlwaysScrollableScrollPhysics(),
-      shrinkWrap: true,
-    );
-  }
 
-  getCommentsItem(int position) {
-    return new Text("评论");
-  }
 
   @override
   void dispose() {

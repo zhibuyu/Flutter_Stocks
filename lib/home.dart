@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mystocks/Market/MarketPage.dart';
-import 'package:mystocks/StockComments/StockCommentsPage.dart';
+import 'package:mystocks/Market/StockIndexPage.dart';
 import 'package:mystocks/news/FinanceNews.dart';
 import 'package:mystocks/pages/MyInfoPage.dart';
 import 'package:mystocks/pages/TestPage.dart';
@@ -38,14 +38,14 @@ class homeState extends State<home> with TickerProviderStateMixin {
       NavigationIconView(
         activeIcon: CustomIcon(),
         icon: CustomInactiveIcon(),
-        title: '股票评论',
+        title: '指数',
         color: Colors.deepOrange,
         vsync: this,
       ),
       NavigationIconView(
         activeIcon: const Icon(Icons.cloud),
         icon: const Icon(Icons.cloud_queue),
-        title: '行情',
+        title: '沪深',
         color: Colors.teal,
         vsync: this,
       ),
@@ -86,7 +86,7 @@ class homeState extends State<home> with TickerProviderStateMixin {
     body = new IndexedStack(
       children: [
         new FinanceNewsPage(),
-        new StockCommentsPage(),
+        new StockIndexPage(),
         new MarketPage(),
         new TestPage(),
         new MyInfoPage()
