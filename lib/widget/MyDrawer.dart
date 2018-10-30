@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class MyDrawer extends StatelessWidget {
   // 菜单文本前面的图标大小
@@ -15,13 +16,9 @@ class MyDrawer extends StatelessWidget {
   List menuTitles = [ '关于', '设置'];
   // 菜单文本前面的图标
   List menuIcons = [
-    './images/leftmenu/ic_about.png',
-    './images/leftmenu/ic_settings.png'
+    Icons.assistant_photo,
+    Icons.settings
   ];
-  // 菜单文本的样式
-  TextStyle menuStyle = new TextStyle(
-    fontSize: 15.0,
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -45,13 +42,13 @@ class MyDrawer extends StatelessWidget {
   Widget getIconImage(path) {
     return new Padding(
       padding: const EdgeInsets.fromLTRB(2.0, 0.0, 6.0, 0.0),
-      child: new Image.asset(path, width: 28.0, height: 28.0),
+      child: Icon(path),
     );
   }
 
   Widget renderRow(BuildContext context, int index) {
     if (index == 0) {
-      // render cover image
+
       var img = new Image.asset(
         './images/cover_img.jpg',
         width: 304.0,
@@ -61,7 +58,32 @@ class MyDrawer extends StatelessWidget {
         width: 304.0,
         height: 304.0,
         margin: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
-        child: img,
+        child:     new UserAccountsDrawerHeader(   //Material内置控件
+          accountName: new Text('zhibuyu'), //用户名
+          accountEmail: new Text('shiwudaozhuan@163.com'),  //用户邮箱
+          currentAccountPicture: new GestureDetector( //用户头像
+            onTap: () {
+              Fluttertoast.showToast(
+                  msg: "点击头像",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIos: 1,
+                  bgcolor: "#OOOOOO",
+                  textcolor: '#ffffff');
+            },
+            child: new CircleAvatar(    //圆形图标控件
+              backgroundImage: new NetworkImage('https://avatars2.githubusercontent.com/u/12659236?s=460&v=4'),//图片调取自网络
+            ),
+          ),
+          decoration: new BoxDecoration(    //用一个BoxDecoration装饰器提供背景图片
+            image: new DecorationImage(
+              fit: BoxFit.fill,
+              // image: new NetworkImage('https://raw.githubusercontent.com/flutter/website/master/_includes/code/layout/lakes/images/lake.jpg')
+              //可以试试图片调取自本地。调用本地资源，需要到pubspec.yaml中配置文件路径
+              image: new ExactAssetImage('images/cover_img.jpg'),
+            ),
+          ),
+        ),
       );
     }
     // 舍去之前的封面图
@@ -85,7 +107,9 @@ class MyDrawer extends StatelessWidget {
           new Expanded(
             child: new Text(
               menuTitles[index],
-              style: menuStyle,
+              style: new TextStyle(
+                fontSize: 15.0,
+              ),
             )
           ),
           rightArrowIcon
@@ -97,17 +121,25 @@ class MyDrawer extends StatelessWidget {
       child: listItemContent,
       onTap: () {
         switch (index) {
-          case 2:
+          case 0:
             // 关于
-//            Navigator.of(context).push(new MaterialPageRoute(builder: (ctx) {
-//              return new AboutPage();
-//            }));
+            Fluttertoast.showToast(
+                msg: "关于",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIos: 1,
+                bgcolor: "#OOOOOO",
+                textcolor: '#ffffff');
             break;
-          case 3:
+          case 1:
             // 设置
-//            Navigator.of(context).push(new MaterialPageRoute(builder: (ctx) {
-//              return new SettingsPage();
-//            }));
+            Fluttertoast.showToast(
+                msg: "设置",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIos: 1,
+                bgcolor: "#OOOOOO",
+                textcolor: '#ffffff');
             break;
         }
       },

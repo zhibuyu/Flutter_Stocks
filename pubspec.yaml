@@ -30,6 +30,7 @@ dependencies:
   fluttertoast: ^2.0.9
   flutter_refresh: ^0.0.2
   gbk2utf8: ^0.0.1
+  shared_preferences: ^0.4.3
 
 #dev_dependencies:
 #  flutter_test:
@@ -50,17 +51,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - images/cover_img.jpg
-    - images/leftmenu/ic_xiaoheiwu.png
-    - images/leftmenu/ic_fabu.png
-    - images/leftmenu/ic_about.png
-    - images/leftmenu/ic_settings.png
-    - images/ic_my_blog.png
-    - images/ic_my_message.png
-    - images/ic_my_question.png
-    - images/ic_my_recommend.png
-    - images/ic_my_team.png
-    - images/ic_discover_pos.png
     - images/ic_avatar_default.png
+    - images/ic_arrow_right.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
 
