@@ -3,7 +3,6 @@ import 'package:mystocks/Market/MarketPage.dart';
 import 'package:mystocks/Market/StockIndexPage.dart';
 import 'package:mystocks/news/FinanceNews.dart';
 import 'package:mystocks/pages/MyInfoPage.dart';
-import 'package:mystocks/pages/TestPage.dart';
 import 'package:mystocks/widget/CustomIcon.dart';
 import 'package:mystocks/widget/CustomInactiveIcon.dart';
 import 'package:mystocks/widget/NavigationIconView.dart';
@@ -51,13 +50,6 @@ class homeState extends State<home> with TickerProviderStateMixin {
         vsync: this,
       ),
       NavigationIconView(
-        activeIcon: const Icon(Icons.favorite),
-        icon: const Icon(Icons.favorite_border),
-        title: '暂空',
-        color: Colors.indigo,
-        vsync: this,
-      ),
-      NavigationIconView(
         activeIcon: const Icon(Icons.accessibility),
         icon: const Icon(Icons.account_box),
         title: '我的',
@@ -90,7 +82,6 @@ class homeState extends State<home> with TickerProviderStateMixin {
         new FinanceNewsPage(),
         new StockIndexPage(),
         new MarketPage(),
-        new TestPage(),
         new MyInfoPage()
       ],
       index: currentIndex,
