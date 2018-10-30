@@ -30,6 +30,7 @@ class homeState extends State<home> with TickerProviderStateMixin {
     super.initState();
     navigationViews = <NavigationIconView>[
       NavigationIconView(
+        activeIcon: const Icon(Icons.account_balance),
         icon: const Icon(Icons.access_alarm),
         title: '新闻',
         color: new Color.fromARGB(255, 0, 215, 198),
@@ -57,7 +58,8 @@ class homeState extends State<home> with TickerProviderStateMixin {
         vsync: this,
       ),
       NavigationIconView(
-        icon: const Icon(Icons.event_available),
+        activeIcon: const Icon(Icons.accessibility),
+        icon: const Icon(Icons.account_box),
         title: '我的',
         color: Colors.pink,
         vsync: this,
