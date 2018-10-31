@@ -3,55 +3,57 @@
 项目地址：[https://github.com/zhibuyu/Flutter_Stocks](https://github.com/zhibuyu/Flutter_Stocks)
 
 # 子不语股票
-#### "读书" 网络小说阅读器，实现追书推荐收藏、书籍/标签检索、模拟翻书的翻页效果、缓存书籍、日夜间模式、本地txt/pdf/epub书籍阅读、字体/主题/亮度设置、Wifi传书等功能！
+#### "子不语股票" 支持财经新闻阅读、实时大盘指数、实时沪深行情、k线查看、登录、网页查看、侧边栏等功能
 
 
 
 ## 项目
-项目使用Flutter进行开发
+项目使用Flutter进行开发，同时支持Andriod与iOS.
 
 ## 截图
 
-- **首页**
-
-<img src="https://github.com/zhibuyu/ReadBook/blob/master/screenshot/home_zhuishu.png?raw=true" width="280"/> <img src="https://github.com/zhibuyu/ReadBook/blob/master/screenshot/home_communication.png?raw=true" width="280"/> <img src="https://github.com/zhibuyu/ReadBook/blob/master/screenshot/home_discover.png?raw=true" width="280"/>
-
-</br>
-
-- **阅读**
-
-<img src="https://github.com/zhibuyu/ReadBook/blob/master/screenshot/read_page_7.png?raw=true" width="280"/> <img src="https://github.com/zhibuyu/ReadBook/blob/master/screenshot/read_page_8.png?raw=true" width="280"/> <img src="https://github.com/zhibuyu/ReadBook/blob/master/screenshot/read_page_9.png?raw=true" width="280"/> <img src="https://github.com/zhibuyu/ReadBook/blob/master/screenshot/read_page_1.png?raw=true" width="280"/> <img src="https://github.com/zhibuyu/ReadBook/blob/master/screenshot/read_page_2.png?raw=true" width="280"/> <img src="https://github.com/zhibuyu/ReadBook/blob/master/screenshot/read_page_3.png?raw=true" width="280"/>
+- **启动页**
+<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/splsh.jpg?raw=true" width="280"/> 
 
 </br>
 
-- **书籍**
+- **主界面**
 
-<img src="https://github.com/zhibuyu/ReadBook/blob/master/screenshot/search.png?raw=true" width="280"/> <img src="https://github.com/zhibuyu/ReadBook/blob/master/screenshot/book_detail.png?raw=true" width="280"/> <img src="https://github.com/zhibuyu/ReadBook/blob/master/screenshot/scan_book.png?raw=true" width="280"/>
-
-</br>
-
-- **社区**
-
-<img src="https://github.com/zhibuyu/ReadBook/blob/master/screenshot/discuss.png?raw=true" width="280"/> <img src="https://github.com/zhibuyu/ReadBook/blob/master/screenshot/discuss_detail.png?raw=true" width="280"/>
+<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/main_news.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/main_index.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/main_husheng.jpg?raw=true" width="280"/><img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/my.jpg?raw=true" width="280"/>
 
 </br>
 
-- **排行榜**
+- **新闻详情**
 
-<img src="https://github.com/zhibuyu/ReadBook/blob/master/screenshot/rank_type.png?raw=true" width="280"/> <img src="https://github.com/zhibuyu/ReadBook/blob/master/screenshot/rank_list.png?raw=true" width="280"/>
-
-</br>
-
-- **主题书单**
-
-<img src="https://github.com/zhibuyu/ReadBook/blob/master/screenshot/subject_list.png?raw=true" width="280"/> <img src="https://github.com/zhibuyu/ReadBook/blob/master/screenshot/subject_tag.png?raw=true" width="280"/> <img src="https://github.com/zhibuyu/ReadBook/blob/master/screenshot/subject_detail.png?raw=true" width="280"/>
+<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/news_deatil.jpg?raw=true" width="280"/> 
 
 </br>
 
-- **书籍分类**
+- **指数、沪深股票详情**
 
-<img src="https://github.com/zhibuyu/ReadBook/blob/master/screenshot/category.png?raw=true" width="280"/> <img src="https://github.com/zhibuyu/ReadBook/blob/master/screenshot/category_list.png?raw=true" width="280"/>
+<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/index_detail.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/stock_detail.jpg?raw=true" width="280"/> 
 
-- **其他**
+</br>
 
-<img src="https://github.com/zhibuyu/ReadBook/blob/master/screenshot/settings-1.png?raw=true" width="280"/> <img src="https://github.com/zhibuyu/ReadBook/blob/master/screenshot/wifi_transfer.png?raw=true" width="280"/>
+- **登录**
+
+<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/login.jpg?raw=true" width="280"/> 
+
+</br>
+
+- **我的**
+
+<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/my_blog.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/my_open.jpg?raw=true" width="280"/>
+<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/my_wechat.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/my_feedback.jpg?raw=true" width="280"/>
+</br>
+
+- **侧边栏**
+
+<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/slide_menu.jpg?raw=true" width="280"/> 
+
+</br>
+
+- **底部按钮主题切换**
+
+<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/change1.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/change2.jpg?raw=true" width="280"/>
+
