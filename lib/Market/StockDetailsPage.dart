@@ -1,10 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mystocks/Market/enity/Stock.dart';
 import 'package:mystocks/Market/enity/StockIndex.dart';
 import 'package:mystocks/Util/ComputeUtil.dart';
+import 'package:mystocks/Util/Constants.dart';
+import 'package:mystocks/Util/DataUtils.dart';
 import 'package:mystocks/news/entiy/ListEnity.dart';
-
+import 'package:http/http.dart' as http;
+import 'package:gbk2utf8/gbk2utf8.dart';
 /**
  * @Description  个股详情
  * @Author  zhibuyu
@@ -43,38 +48,58 @@ class StockDetailsPageState extends State<StockDetailsPage>
       yesterday_close,
       current_prices,
       today_open;
-  String type,stock_code2,stock_code,stock_name;
+  String type, stock_code2, stock_code, stock_name;
+
   StockDetailsPageState(this.enity);
 
   @override
   void initState() {
-     type =enity.type;
-     if("stock"==type){
-       Stock stock=enity.data;
-       stock_name=stock.name;
-       stock_code=stock.stock_code;
-       stock_code2=stock.stock_code2;
-       traded_num = double.parse(stock.traded_num);
-       traded_amount = double.parse(stock.traded_amount);
-       gains = stock.gains;
+    type = enity.type;
+    initData();
+  }
 
-       yesterday_close = double.parse(stock.yesterday_close);
-       current_prices = double.parse(stock.current_prices);
-       today_open = double.parse(stock.today_open);
-     }else{
-       StockIndex stockIndex=enity.data;
-       stock_name=stockIndex.name;
-       stock_code=stockIndex.stock_code;
-       stock_code2=stockIndex.stock_code2;
-     }
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+        body: new RefreshIndicator(
+            child: mainWidget(), onRefresh: pullToRefresh));
+  }
+
+  void initData(){
+    if ("stock" == type) {
+      Stock stock = enity.data;
+      stock_name = stock.name;
+      stock_code = stock.stock_code;
+      stock_code2 = stock.stock_code2;
+      traded_num = double.parse(stock.traded_num);
+      traded_amount = double.parse(stock.traded_amount);
+      gains = stock.gains;
+
+      yesterday_close = double.parse(stock.yesterday_close);
+      current_prices = double.parse(stock.current_prices);
+      today_open = double.parse(stock.today_open);
+    } else {
+      StockIndex stockIndex = enity.data;
+      stock_name = stockIndex.name;
+      stock_code = stockIndex.stock_code;
+      stock_code2 = stockIndex.stock_code2;
+    }
     //日K线查询：
-    String daily_kimg_url = "http://image.sinajs.cn/newchart/daily/n/" + stock_code2 +".gif";
+    String daily_kimg_url =
+        "http://image.sinajs.cn/newchart/daily/n/" + stock_code2 + ".gif";
     //分时线的查询：
-    String min_kimg_url = "http://image.sinajs.cn/newchart/min/n/" +stock_code2.toString() + ".gif";
+    String min_kimg_url = "http://image.sinajs.cn/newchart/min/n/" +
+        stock_code2.toString() +
+        ".gif";
     //周K线查询：
-    String weekly_kimg_url = "http://image.sinajs.cn/newchart/weekly/n/" +stock_code2.toString() +".gif";
+    String weekly_kimg_url = "http://image.sinajs.cn/newchart/weekly/n/" +
+        stock_code2.toString() +
+        ".gif";
     //月K线查询：
-    String monthly_kimg_url = "http://image.sinajs.cn/newchart/monthly/n/" +stock_code2.toString() +".gif";
+    String monthly_kimg_url = "http://image.sinajs.cn/newchart/monthly/n/" +
+        stock_code2.toString() +
+        ".gif";
     _allPages = <_Page>[
       _Page("分时", min_kimg_url),
       _Page("日K", daily_kimg_url),
@@ -83,25 +108,34 @@ class StockDetailsPageState extends State<StockDetailsPage>
     ];
     _controller = TabController(vsync: this, length: _allPages.length);
     _controller.addListener(_handleTabSelection);
-     _selectedPage = _allPages[0];
+    _selectedPage = _allPages[0];
+  }
+  mainWidget() {
+    return CustomScrollView(
+      slivers: <Widget>[
+        SliverAppBar(
+          pinned: true,
+          flexibleSpace: buildAppBar(),
+        ),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              return new Column(
+                children: ShowMainWidget(),
+              );
+            },
+            childCount: 1,
+          ),
+        )
+      ],
+    );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    if("stock"==type){
-      return Scaffold(
-          appBar: buildAppBar(),
-          body: new Column(
-            children:  <Widget>[
-              TopMarket(), getKline()],
-          ));
-    }else{
-      return Scaffold(
-          appBar: buildAppBar(),
-          body: new Column(
-            children:  <Widget>[
-             getKline()],
-          ));
+  ShowMainWidget() {
+    if ("stock" == type) {
+      return <Widget>[TopMarket(), getKline()];
+    } else {
+      return <Widget>[getKline()];
     }
   }
 
@@ -133,7 +167,8 @@ class StockDetailsPageState extends State<StockDetailsPage>
   /**
    * K 线图
    */
-  getKline() {
+  Widget getKline() {
+    print('加载K线');
     return new Container(
       height: 300.0,
       child: Scaffold(
@@ -161,7 +196,7 @@ class StockDetailsPageState extends State<StockDetailsPage>
   /**
    * 顶部行情部分
    */
-  TopMarket() {
+  Widget TopMarket() {
     return new Container(
       margin: new EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 0.0),
       height: 50.0,
@@ -179,7 +214,7 @@ class StockDetailsPageState extends State<StockDetailsPage>
               child: Column(
                 children: <Widget>[
                   Expanded(
-                    child:    Row(
+                    child: Row(
                       children: <Widget>[
                         Text(
                           "今    开",
@@ -201,8 +236,8 @@ class StockDetailsPageState extends State<StockDetailsPage>
                       ],
                     ),
                     flex: 1,
-                  )
-               ,Expanded(
+                  ),
+                  Expanded(
                     child: Row(
                       children: <Widget>[
                         Text(
@@ -226,7 +261,6 @@ class StockDetailsPageState extends State<StockDetailsPage>
                     ),
                     flex: 1,
                   )
-
                 ],
               ),
             ),
@@ -237,54 +271,53 @@ class StockDetailsPageState extends State<StockDetailsPage>
               padding: new EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
               child: new Column(children: <Widget>[
                 Expanded(
-                  child:   Row(
+                  child: Row(
                     children: <Widget>[
                       Text(
                         "昨    收",
-                        style:
-                        new TextStyle(fontSize: 12.0, color: Colors.black38),
+                        style: new TextStyle(
+                            fontSize: 12.0, color: Colors.black38),
                         textAlign: TextAlign.left,
                       ),
                       Expanded(
                         child: Container(
-                          child:  Text(
+                          child: Text(
                             yesterday_close.toStringAsFixed(2),
-                            style: new TextStyle(fontSize: 12.0, color: Colors.black),
+                            style: new TextStyle(
+                                fontSize: 12.0, color: Colors.black),
                           ),
                           alignment: FractionalOffset.centerRight,
                         ),
                         flex: 1,
                       )
-
                     ],
                   ),
                   flex: 1,
                 ),
                 Expanded(
-                  child:  Row(
+                  child: Row(
                     children: <Widget>[
                       Text(
                         "成交额",
-                        style:
-                        new TextStyle(fontSize: 12.0, color: Colors.black38),
+                        style: new TextStyle(
+                            fontSize: 12.0, color: Colors.black38),
                         textAlign: TextAlign.left,
                       ),
                       Expanded(
                         child: Container(
-                          child:Text(
-                            (traded_amount ~/ 10000).toString()+"万",
-                            style: new TextStyle(fontSize: 12.0, color: Colors.black),
-                          ) ,
+                          child: Text(
+                            (traded_amount ~/ 10000).toString() + "万",
+                            style: new TextStyle(
+                                fontSize: 12.0, color: Colors.black),
+                          ),
                           alignment: FractionalOffset.centerRight,
                         ),
                         flex: 1,
                       )
-
                     ],
-                  ) ,
+                  ),
                   flex: 1,
                 )
-
               ]),
             ),
             flex: 1,
@@ -354,8 +387,6 @@ class StockDetailsPageState extends State<StockDetailsPage>
     );
   }
 
-
-
   @override
   void dispose() {
     _controller.dispose();
@@ -366,5 +397,56 @@ class StockDetailsPageState extends State<StockDetailsPage>
     setState(() {
       _selectedPage = _allPages[_controller.index];
     });
+  }
+
+  Future<Null> pullToRefresh() async {
+    getDatas(REFRESH_REQIEST);
+    return null;
+  }
+
+  void getDatas(int request_type) {
+    if ("stock" == type) {
+      String url = "http://hq.sinajs.cn/list=" + stock_code2;
+      fetch(url).then((data) {
+        setState(() {
+          List<String> stockstrs = data.split(";");
+          setState(() {
+            String str = stockstrs[0];
+            Stock stock = new Stock();
+            stock= DealStocks(str, stock);
+            traded_num = double.parse(stock.traded_num);
+            traded_amount = double.parse(stock.traded_amount);
+            gains = ComputeGainsRate(yesterday_close, current_prices, today_open);
+
+            yesterday_close = double.parse(stock.yesterday_close);
+            current_prices = double.parse(stock.current_prices);
+            today_open = double.parse(stock.today_open);
+          });
+          if (request_type == REFRESH_REQIEST) {
+            Fluttertoast.showToast(
+                msg: "刷新成功",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIos: 1,
+                bgcolor: "#OOOOOO",
+                textcolor: '#ffffff');
+          }
+        });
+      }).catchError((e) {
+        Fluttertoast.showToast(
+            msg: "网络异常，请检查",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIos: 1,
+            bgcolor: "#OOOOOO",
+            textcolor: '#ffffff');
+      });
+    }
+  }
+
+  Future fetch(String url) async {
+    http.Response response = await http.get(url);
+    String str = decodeGbk(response.bodyBytes);
+    return str;
   }
 }

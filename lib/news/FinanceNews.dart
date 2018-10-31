@@ -70,7 +70,7 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
    * 列表item
    */
   Widget getItem(int i) {
-    print("加载列表getRow==》" + i.toString());
+//    print("加载列表getRow==》" + i.toString());
     Data data = listData[i].data;
     String type = listData[i].type;
     if ("main" == type) {
