@@ -12,11 +12,6 @@
 
 ## 截图
 
-- **启动页**
-<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/splsh.jpg?raw=true" width="280"/> 
-
-</br>
-
 - **主界面**
 
 <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/main_news.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/main_index.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/main_husheng.jpg?raw=true" width="280"/><img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/my.jpg?raw=true" width="280"/>
@@ -35,11 +30,6 @@
 
 </br>
 
-- **登录**
-
-<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/login.jpg?raw=true" width="280"/> 
-
-</br>
 
 - **我的**
 
@@ -47,7 +37,8 @@
 <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/my_wechat.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/my_feedback.jpg?raw=true" width="280"/>
 </br>
 
-- **侧边栏**
+- **启动页、登录、侧边栏**
+<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/splsh.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/login.jpg?raw=true" width="280"/> 
 
 <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/slide_menu.jpg?raw=true" width="280"/> 
 
