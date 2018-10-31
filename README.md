@@ -18,15 +18,9 @@
 
 </br>
 
-- **新闻详情**
+- **新闻、指数、沪深股票详情**
 
-<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/news_deatil.jpg?raw=true" width="280"/> 
-
-</br>
-
-- **指数、沪深股票详情**
-
-<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/index_detail.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/stock_detail.jpg?raw=true" width="280"/> 
+<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/news_deatil.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/index_detail.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/stock_detail.jpg?raw=true" width="280"/> 
 
 </br>
 
