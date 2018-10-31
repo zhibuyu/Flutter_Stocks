@@ -1,7 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:fluwx/fluwx.dart';
 import 'package:mystocks/Login/LoginPage.dart';
 import 'package:mystocks/news/NewsWebPage.dart';
 import 'package:mystocks/widget/WechatPage.dart';
+import 'package:fluwx/fluwx.dart' as fluwx;
+import 'package:share/share.dart';
 
 /**
  * @Description  文我的界面
@@ -19,8 +24,14 @@ class MyInfoPageState extends State<MyInfoPage> {
   static const double IMAGE_ICON_WIDTH = 30.0;
   static const double ARROW_ICON_WIDTH = 16.0;
 
-  var titles = ["","我的博客", "我的Github", "我的微信","意见反馈"];
-  List icons = [Icons.assignment,Icons.all_inclusive,Icons.supervisor_account,Icons.email];
+  var titles = ["", "我的博客", "我的Github", "我的微信", "意见反馈", "分享"];
+  List icons = [
+    Icons.assignment,
+    Icons.all_inclusive,
+    Icons.supervisor_account,
+    Icons.email,
+    Icons.share
+  ];
   var userAvatar;
   var userName;
   var rightArrowIcon = new Image.asset(
@@ -29,13 +40,10 @@ class MyInfoPageState extends State<MyInfoPage> {
     height: ARROW_ICON_WIDTH,
   );
 
-  MyInfoPageState() {
-
-  }
-
   @override
   void initState() {
     super.initState();
+    fluwx.register(appId: "wx2785c3e35d586781");
   }
 
   Widget getIconImage(path) {
@@ -84,13 +92,13 @@ class MyInfoPageState extends State<MyInfoPage> {
                         ),
                       ),
                     ),
-             Container(
-               margin: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
-               child: Text(
-                 userName == null ? "点击头像登录" : userName,
-                 style: new TextStyle(color: Colors.white, fontSize: 16.0),
-               ),
-             ) ,
+              Container(
+                margin: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
+                child: Text(
+                  userName == null ? "点击头像登录" : userName,
+                  style: new TextStyle(color: Colors.white, fontSize: 16.0),
+                ),
+              ),
             ],
           ),
         ),
@@ -112,13 +120,14 @@ class MyInfoPageState extends State<MyInfoPage> {
             child: new Row(
               children: <Widget>[
                 Container(
-                  child: Icon(icons[i-1]),
+                  child: Icon(icons[i - 1]),
                   margin: EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
                 ),
                 new Expanded(
-                    child: new Text(titles[i],
-                      style: new TextStyle(fontSize: 16.0),
-                    )),
+                    child: new Text(
+                  titles[i],
+                  style: new TextStyle(fontSize: 16.0),
+                )),
                 rightArrowIcon
               ],
             ),
@@ -129,39 +138,136 @@ class MyInfoPageState extends State<MyInfoPage> {
         ],
       ),
       onTap: () {
-        _handleListItemClick(i); },
+        _handleListItemClick(i);
+      },
     );
   }
 
   _handleListItemClick(int index) {
-    switch(index){
+    switch (index) {
       case 1:
         String h5_url = "https://blog.csdn.net/u010123643";
         Navigator.push(
             context,
             new MaterialPageRoute(
-                builder: (context) => new NewsWebPage(h5_url,'我的博客')));
+                builder: (context) => new NewsWebPage(h5_url, '我的博客')));
         break;
       case 2:
         String h5_url = "https://github.com/zhibuyu";
         Navigator.push(
             context,
             new MaterialPageRoute(
-                builder: (context) => new NewsWebPage(h5_url,'我的开源')));
+                builder: (context) => new NewsWebPage(h5_url, '我的开源')));
         break;
       case 3:
-        Navigator.push(
-            context,
-            new MaterialPageRoute(
-                builder: (context) => new WechatPage()));
+        Navigator.push(context,
+            new MaterialPageRoute(builder: (context) => new WechatPage()));
         break;
       case 4:
         String h5_url = "https://github.com/zhibuyu/Flutter_Stocks/issues";
         Navigator.push(
             context,
             new MaterialPageRoute(
-                builder: (context) => new NewsWebPage(h5_url,'意见反馈')));
+                builder: (context) => new NewsWebPage(h5_url, '意见反馈')));
+        break;
+      case 5:
+        showDemoDialog<String>(
+          context: context,
+          child: const CupertinoDessertDialog(),
+        );
+
         break;
     }
+  }
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  void showDemoDialog<T>({BuildContext context, Widget child}) {
+    showDialog<T>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) => child,
+    ).then<void>((T value) {
+      // The value passed to Navigator.pop() or null.
+      if (value != null) {
+        _scaffoldKey.currentState.showSnackBar(
+          SnackBar(
+            content: Text('You selected: $value'),
+          ),
+        );
+      }
+    });
+  }
+}
+
+class CupertinoDessertDialog extends StatelessWidget {
+  const CupertinoDessertDialog({Key key, this.title, this.content})
+      : super(key: key);
+
+  final Widget title;
+  final Widget content;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoAlertDialog(
+      title: title,
+      content: content,
+      actions: <Widget>[
+        CupertinoDialogAction(
+          child: const Text('全平台分享'),
+          onPressed: () {
+            final RenderBox box = context.findRenderObject();
+            Share.share("https://github.com/zhibuyu/Flutter_Stocks/blob/master/apk/mystocks.apk",
+                sharePositionOrigin:
+                box.localToGlobal(Offset.zero) &
+                box.size);
+            Navigator.pop(context, 'Cancel');
+          },
+        ),
+        CupertinoDialogAction(
+          child: const Text('微信好友'),
+          onPressed: () {
+            fluwx.share(WeChatShareImageModel(
+                image: "assets://images/down_qrcode.png",
+                thumbnail: "",
+                transaction: "",
+                scene: WeChatScene.SESSION,
+                description: "image"));
+            Navigator.pop(context, 'Cancel');
+          },
+        ),
+        CupertinoDialogAction(
+          child: const Text('微信朋友圈'),
+          onPressed: () {
+            fluwx.share(WeChatShareImageModel(
+                image: "assets://images/down_qrcode.png",
+                thumbnail: "",
+                transaction: "",
+                scene: WeChatScene.TIMELINE,
+                description: "image"));
+            Navigator.pop(context, 'Cancel');
+          },
+        ),
+        CupertinoDialogAction(
+          child: const Text("微信收藏"),
+          onPressed: () {
+            fluwx.share(WeChatShareImageModel(
+                image: "assets://images/down_qrcode.png",
+                thumbnail: "",
+                transaction: "",
+                scene: WeChatScene.FAVORITE,
+                description: "image"));
+            Navigator.pop(context, 'Cancel');
+          },
+        ),
+        CupertinoDialogAction(
+          child: const Text('取消'),
+          isDestructiveAction: true,
+          onPressed: () {
+            Navigator.pop(context, 'Cancel');
+          },
+        ),
+      ],
+    );
   }
 }

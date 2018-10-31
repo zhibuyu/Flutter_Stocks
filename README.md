@@ -41,3 +41,8 @@
 
 <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/change1.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/change2.jpg?raw=true" width="280"/>
 
+</br>
+
+- **分享**
+
+<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/share.jpg?raw=true" width="280"/>

@@ -25,6 +25,15 @@ apply plugin: 'com.android.application'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
+    signingConfigs {
+        correctsign{
+            keyAlias 'xyu.keystore'
+            keyPassword 'xyu315110'
+            storeFile file('xyu.keystore')
+            storePassword 'xyu315110'
+        }
+    }
+
     compileSdkVersion 27
 
     lintOptions {
@@ -45,7 +54,10 @@ android {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.correctsign
+        }
+        debug {
+            signingConfig signingConfigs.correctsign
         }
     }
 }
