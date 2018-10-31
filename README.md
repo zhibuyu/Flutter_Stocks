@@ -33,14 +33,13 @@
 
 - **我的**
 
-<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/my_blog.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/my_open.jpg?raw=true" width="280"/>
-<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/my_wechat.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/my_feedback.jpg?raw=true" width="280"/>
+<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/my_blog.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/my_open.jpg?raw=true" width="280"/><img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/my_wechat.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/my_feedback.jpg?raw=true" width="280"/>
+
 </br>
 
 - **启动页、登录、侧边栏**
-<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/splsh.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/login.jpg?raw=true" width="280"/> 
 
-<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/slide_menu.jpg?raw=true" width="280"/> 
+<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/splsh.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/login.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/slide_menu.jpg?raw=true" width="280"/> 
 
 </br>
 
