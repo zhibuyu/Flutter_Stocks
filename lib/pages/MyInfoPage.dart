@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mystocks/Login/LoginPage.dart';
 import 'package:mystocks/news/NewsWebPage.dart';
 import 'package:mystocks/widget/WechatPage.dart';

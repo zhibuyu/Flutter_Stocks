@@ -5,7 +5,7 @@
  * @Version  1.0
  */
 
-import 'package:mystocks/Market/enity/Stock.dart';
+import 'package:mystocks/market/enity/Stock.dart';
 
 /**
  * 处理股票数据

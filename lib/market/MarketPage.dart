@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:mystocks/Market/StockDetailsPage.dart';
-import 'package:mystocks/Market/enity/Stock.dart';
+import 'package:mystocks/market/StockDetailsPage.dart';
+import 'package:mystocks/market/enity/Stock.dart';
 import 'package:http/http.dart' as http;
 import 'package:gbk2utf8/gbk2utf8.dart';
 import 'package:mystocks/Util/ComputeUtil.dart';

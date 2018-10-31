@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mystocks/Market/MarketPage.dart';
-import 'package:mystocks/Market/StockIndexPage.dart';
+import 'package:mystocks/market/MarketPage.dart';
+import 'package:mystocks/market/StockIndexPage.dart';
 import 'package:mystocks/news/FinanceNews.dart';
 import 'package:mystocks/pages/MyInfoPage.dart';
 import 'package:mystocks/widget/CustomIcon.dart';
