@@ -40,21 +40,21 @@ class homeState extends State<home> with TickerProviderStateMixin {
         activeIcon: CustomIcon(),
         icon: CustomInactiveIcon(),
         title: '指数',
-        color: Colors.deepOrange,
+        color: new Color.fromARGB(255, 0, 215, 198),
         vsync: this,
       ),
       NavigationIconView(
         activeIcon: const Icon(Icons.cloud),
         icon: const Icon(Icons.cloud_queue),
         title: '沪深',
-        color: Colors.teal,
+        color: new Color.fromARGB(255, 0, 215, 198),
         vsync: this,
       ),
       NavigationIconView(
         activeIcon: const Icon(Icons.accessibility),
         icon: const Icon(Icons.account_box),
         title: '我的',
-        color: Colors.pink,
+        color: new Color.fromARGB(255, 0, 215, 198),
         vsync: this,
       )
     ];
