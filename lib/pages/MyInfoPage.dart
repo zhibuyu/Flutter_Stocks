@@ -43,7 +43,7 @@ class MyInfoPageState extends State<MyInfoPage> {
   @override
   void initState() {
     super.initState();
-    fluwx.register(appId: "wx2785c3e35d586781");
+    fluwx.register(appId: "wx423d7d8752fd810c");
   }
 
   Widget getIconImage(path) {
