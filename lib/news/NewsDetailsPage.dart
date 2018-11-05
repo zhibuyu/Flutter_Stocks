@@ -48,7 +48,7 @@ class NewsDetailsPageState extends State<NewsDetailsPage> {
                 Text(title,
                     style: new TextStyle(
                         fontSize: 20.0,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w700,
                         color: Colors.black)),
                 alignment: FractionalOffset.center,
               ),
