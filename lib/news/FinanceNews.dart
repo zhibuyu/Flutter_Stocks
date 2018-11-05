@@ -11,6 +11,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:mystocks/Util/Constants.dart';
 import 'package:mystocks/Util/StringUtil.dart';
 import 'package:mystocks/Util/TimeUtils.dart';
+import 'package:mystocks/news/NewsDetailsPage.dart';
 import 'package:mystocks/news/NewsWebPage.dart';
 import 'package:mystocks/news/entiy/ListEnity.dart';
 import 'package:mystocks/news/entiy/news_enity.dart';
@@ -224,10 +225,12 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
    */
   void onItemClick(int i, String articleTitle) {
     String h5_url = (listData[i].data as Data).url;
+    String content= (listData[i].data as Data).articleContent;
     Navigator.push(
         context,
         new MaterialPageRoute(
-            builder: (context) => new NewsWebPage(h5_url,'新闻详情')));
+//            builder: (context) => new NewsWebPage(h5_url,'新闻详情')));
+            builder: (context) => new NewsDetailsPage(articleTitle,content)));
   }
 
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
