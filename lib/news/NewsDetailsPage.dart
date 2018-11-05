@@ -29,11 +29,11 @@ class NewsDetailsPageState extends State<NewsDetailsPage> {
         iconTheme: new IconThemeData(color: Colors.white),
         brightness: Brightness.light,
         title: Container(
-          margin: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),
+          margin: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
           child: Text("新闻详情",
               style: new TextStyle(
                   fontSize: 20.0,
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w500,
                   color: Colors.white)),
         ),
         centerTitle: true,
@@ -43,6 +43,7 @@ class NewsDetailsPageState extends State<NewsDetailsPage> {
           child: Column(
             children: <Widget>[
               Container(
+                margin: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),
                 child:
                 Text(title,
                     style: new TextStyle(

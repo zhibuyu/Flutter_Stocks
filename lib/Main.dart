@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mystocks/splash.dart';
+import 'package:mystocks/SplashPage.dart';
 
 void main() {
   runApp(new MaterialApp(

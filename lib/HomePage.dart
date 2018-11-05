@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:mystocks/market/MarketPage.dart';
 import 'package:mystocks/market/StockIndexPage.dart';
-import 'package:mystocks/news/FinanceNews.dart';
-import 'package:mystocks/pages/MyInfoPage.dart';
+import 'package:mystocks/news/FinanceNewsPage.dart';
+import 'package:mystocks/my/MyInfoPage.dart';
 import 'package:mystocks/widget/CustomIcon.dart';
 import 'package:mystocks/widget/CustomInactiveIcon.dart';
-import 'package:mystocks/widget/MyDrawer.dart';
+import 'package:mystocks/my/MyDrawer.dart';
 import 'package:mystocks/widget/NavigationIconView.dart';
 
 /**
  * 主页
  */
-class home extends StatefulWidget {
+class HomePage extends StatefulWidget {
   static const String routeName = '/material/bottom_navigation';
 
   @override
-  homeState createState() => homeState();
+  HomePageState createState() => HomePageState();
 }
 
-class homeState extends State<home> with TickerProviderStateMixin {
+class HomePageState extends State<HomePage> with TickerProviderStateMixin {
   int currentIndex = 0;
   BottomNavigationBarType type = BottomNavigationBarType.shifting;
   List<NavigationIconView> navigationViews;

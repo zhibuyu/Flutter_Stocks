@@ -4,7 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:fluwx/fluwx.dart';
 import 'package:mystocks/Login/LoginPage.dart';
 import 'package:mystocks/news/NewsWebPage.dart';
-import 'package:mystocks/widget/WechatPage.dart';
+import 'package:mystocks/my/WechatPage.dart';
 import 'package:fluwx/fluwx.dart' as fluwx;
 import 'package:share/share.dart';
 

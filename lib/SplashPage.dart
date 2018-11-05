@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:mystocks/home.dart';
+import 'package:mystocks/HomePage.dart';
 class SplashPage extends StatefulWidget {
   @override
   SplashState createState() => new SplashState();
@@ -17,7 +17,7 @@ class SplashState extends State<SplashPage> {
     timer = new Timer(const Duration(milliseconds: 1500), () {
       try {
         Navigator.of(context).pushAndRemoveUntil(new MaterialPageRoute(
-            builder: (BuildContext context) => new home()), (//跳转到主页
+            builder: (BuildContext context) => new HomePage()), (//跳转到主页
             Route route) => route == null);
       } catch (e) {
 
