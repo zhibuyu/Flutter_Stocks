@@ -210,7 +210,7 @@ class StockDetailsPageState extends State<StockDetailsPage>
           ),
           new Expanded(
             child: new Container(
-              padding: new EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
+              padding: new EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
               child: Column(
                 children: <Widget>[
                   Expanded(
@@ -250,6 +250,7 @@ class StockDetailsPageState extends State<StockDetailsPage>
                           child: Container(
                             child: Text(
                               (traded_num / 1000000).toStringAsFixed(2) + "万手",
+                              maxLines: 1,
                               style: new TextStyle(
                                   fontSize: 12.0, color: Colors.black),
                             ),
@@ -268,7 +269,7 @@ class StockDetailsPageState extends State<StockDetailsPage>
           ),
           new Expanded(
             child: new Container(
-              padding: new EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
+              padding: new EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
               child: new Column(children: <Widget>[
                 Expanded(
                   child: Row(
@@ -309,6 +310,7 @@ class StockDetailsPageState extends State<StockDetailsPage>
                             (traded_amount ~/ 10000).toString() + "万",
                             style: new TextStyle(
                                 fontSize: 12.0, color: Colors.black),
+                            maxLines: 1,
                           ),
                           alignment: FractionalOffset.centerRight,
                         ),

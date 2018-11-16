@@ -58,6 +58,7 @@ class StockIndexPageState extends State<StockIndexPage> {
         "s_sh000017,s_sh000300,s_sh000905,s_sz399001,s_sz399002,s_sz399003,s_sz399004,s_sz399005,s_sz399006,s_sz399008,s_sz399100,"
         "s_sz399101,s_sz399106,s_sz399107,s_sz399108,s_sz399333,s_sz399606";
     fetch(url).then((data) {
+      print("指数数据==》"+data);
       setState(() {
         List<String> index_strs = data.split(";");
         setState(() {
@@ -133,7 +134,7 @@ class StockIndexPageState extends State<StockIndexPage> {
     return new GestureDetector(
       child:  Card(
         child:  Container(
-          padding: new EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
+          padding: new EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 15.0),
           child: Column(
             children: <Widget>[
               Expanded(
@@ -147,36 +148,42 @@ class StockIndexPageState extends State<StockIndexPage> {
               Expanded(
                 child:new Text(
                   stockIndex.current_points,
-                  style: new TextStyle(fontSize: 22.0, color: show_color),
+                  style: new TextStyle(fontSize: 20.0, color: show_color),
+                  maxLines: 1,
                   textAlign: TextAlign.center,
                 ) ,
                 flex: 1,
               ),
               Expanded(
-                child:  Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Container(
-                        child:Text(
-                          stockIndex.current_prices,
-                          style: new TextStyle(fontSize: 12.0, color: show_color),
+                child: Container(
+                  padding: new EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Container(
+                          child:Text(
+                            stockIndex.current_prices,
+                            style: new TextStyle(fontSize: 12.0, color: Colors.blue),
+                            maxLines: 1,
+                          ),
+                          alignment: FractionalOffset.centerLeft,
                         ),
-                        alignment: FractionalOffset.centerLeft,
+                        flex: 1,
                       ),
-                      flex: 1,
-                    ),
-                    Expanded(
-                      child: Container(
-                        child:Text(
-                          change_prefix+gains_rate+"%",
-                          style: new TextStyle(fontSize: 12.0, color: show_color),
+                      Expanded(
+                        child: Container(
+                          child:Text(
+                            change_prefix+gains_rate+"%",
+                            style: new TextStyle(fontSize: 12.0, color: show_color),
+                            maxLines: 1,
+                          ),
+                          alignment: FractionalOffset.centerRight,
                         ),
-                        alignment: FractionalOffset.centerRight,
-                      ),
-                      flex: 1,
-                    )
-                  ],
-                ),
+                        flex: 1,
+                      )
+                    ],
+                  ),
+                ) ,
                 flex: 1,
               )
             ],

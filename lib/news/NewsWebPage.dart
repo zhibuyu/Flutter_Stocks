@@ -106,9 +106,15 @@ class NewsWebPageState extends State<NewsWebPage>{
   void dispose() {
     // 回收相关资源
     // Every listener should be canceled, the same should be done with this stream.
-    onUrlChanged.cancel();
-    onStateChanged.cancel();
-    flutterWebViewPlugin.dispose();
+    if(onUrlChanged!=null){
+      onUrlChanged.cancel();
+    }
+    if(onStateChanged!=null){
+      onStateChanged.cancel();
+    }
+    if(flutterWebViewPlugin!=null){
+      flutterWebViewPlugin.dispose();
+    }
     super.dispose();
   }
 }
