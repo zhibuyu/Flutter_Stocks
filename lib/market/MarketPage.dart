@@ -9,6 +9,7 @@ import 'package:mystocks/Util/ComputeUtil.dart';
 import 'package:mystocks/Util/Constants.dart';
 import 'package:mystocks/Util/DataUtils.dart';
 import 'package:mystocks/news/entiy/ListEnity.dart';
+import 'package:mystocks/util/HexColor.dart';
 
 /**
  * @Description  行情界面
@@ -56,8 +57,8 @@ class MarketPageState extends State<MarketPage> {
                 toastLength: Toast.LENGTH_SHORT,
                 gravity: ToastGravity.BOTTOM,
                 timeInSecForIos: 1,
-                bgcolor: "#OOOOOO",
-                textcolor: '#ffffff');
+                backgroundColor: HexColor("#OOOOOO"),
+                textColor: HexColor('#ffffff'));
           }
         });
       });
@@ -67,8 +68,8 @@ class MarketPageState extends State<MarketPage> {
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIos: 1,
-          bgcolor: "#OOOOOO",
-          textcolor: '#ffffff');
+          backgroundColor: HexColor("#OOOOOO"),
+          textColor: HexColor('#ffffff'));
     });
   }
 

@@ -10,6 +10,7 @@ import 'package:mystocks/Util/DataUtils.dart';
 import 'package:mystocks/news/entiy/ListEnity.dart';
 import 'package:http/http.dart' as http;
 import 'package:gbk2utf8/gbk2utf8.dart';
+import 'package:mystocks/util/HexColor.dart';
 /**
  * @Description  个股详情
  * @Author  zhibuyu
@@ -186,10 +187,11 @@ class StockDetailsPageState extends State<StockDetailsPage>
   Widget buildTabView(_Page page) {
     return Builder(builder: (BuildContext context) {
       return Container(
-          child: new CachedNetworkImage(
-        imageUrl: page.img_url,
-        errorWidget: new Icon(Icons.error),
-      ));
+          child: CachedNetworkImage(
+            imageUrl: page.img_url,
+            placeholder: (context, url) => new CircularProgressIndicator(),
+            errorWidget: (context, url, error) => new Icon(Icons.error),
+          ));
     });
   }
 
@@ -430,8 +432,8 @@ class StockDetailsPageState extends State<StockDetailsPage>
                 toastLength: Toast.LENGTH_SHORT,
                 gravity: ToastGravity.BOTTOM,
                 timeInSecForIos: 1,
-                bgcolor: "#OOOOOO",
-                textcolor: '#ffffff');
+                backgroundColor: HexColor("#OOOOOO"),
+                textColor: HexColor('#ffffff'));
           }
         });
       }).catchError((e) {
@@ -440,8 +442,8 @@ class StockDetailsPageState extends State<StockDetailsPage>
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIos: 1,
-            bgcolor: "#OOOOOO",
-            textcolor: '#ffffff');
+            backgroundColor: HexColor("#OOOOOO"),
+            textColor: HexColor('#ffffff'));
       });
     }
   }

@@ -39,28 +39,25 @@ class NewsWebPageState extends State<NewsWebPage>{
 
   @override
   void initState() {
+
     onStateChanged = flutterWebViewPlugin.onStateChanged.listen((WebViewStateChanged state){
       // state.type是一个枚举类型，取值有：WebViewState.shouldStart, WebViewState.startLoad, WebViewState.finishLoad
-      switch (state.type) {
-        case WebViewState.shouldStart:
+      if(state.type == WebViewState.shouldStart){
         // 准备加载
-          setState(() {
-            loading = true;
-          });
-          break;
-        case WebViewState.startLoad:
+        setState(() {
+          loading = true;
+        });
+      }else if(state.type == WebViewState.startLoad){
         // 开始加载
-          break;
-        case WebViewState.finishLoad:
+      }else if(state.type == WebViewState.finishLoad){
         // 加载完成
-          setState(() {
-            loading = false;
-          });
-          if (isLoadingCallbackPage) {
-            // 当前是回调页面，则调用js方法获取数据
-            parseResult();
-          }
-          break;
+        setState(() {
+          loading = false;
+        });
+        if (isLoadingCallbackPage) {
+          // 当前是回调页面，则调用js方法获取数据
+          parseResult();
+        }
       }
     });
   }

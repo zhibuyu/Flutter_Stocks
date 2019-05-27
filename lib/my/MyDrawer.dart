@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:mystocks/util/HexColor.dart';
 
 class MyDrawer extends StatelessWidget {
   // 菜单文本前面的图标大小
@@ -68,8 +69,8 @@ class MyDrawer extends StatelessWidget {
                   toastLength: Toast.LENGTH_SHORT,
                   gravity: ToastGravity.BOTTOM,
                   timeInSecForIos: 1,
-                  bgcolor: "#OOOOOO",
-                  textcolor: '#ffffff');
+                  backgroundColor: HexColor("#OOOOOO"),
+                  textColor: HexColor('#ffffff'));
             },
             child: new CircleAvatar(    //圆形图标控件
               backgroundImage: new NetworkImage('https://avatars2.githubusercontent.com/u/12659236?s=460&v=4'),//图片调取自网络
@@ -128,8 +129,8 @@ class MyDrawer extends StatelessWidget {
                 toastLength: Toast.LENGTH_SHORT,
                 gravity: ToastGravity.BOTTOM,
                 timeInSecForIos: 1,
-                bgcolor: "#OOOOOO",
-                textcolor: '#ffffff');
+                backgroundColor: HexColor("#OOOOOO"),
+                textColor: HexColor('#ffffff'));
             break;
           case 1:
             // 设置
@@ -138,8 +139,8 @@ class MyDrawer extends StatelessWidget {
                 toastLength: Toast.LENGTH_SHORT,
                 gravity: ToastGravity.BOTTOM,
                 timeInSecForIos: 1,
-                bgcolor: "#OOOOOO",
-                textcolor: '#ffffff');
+                backgroundColor: HexColor("#OOOOOO"),
+                textColor: HexColor('#ffffff'));
             break;
         }
       },

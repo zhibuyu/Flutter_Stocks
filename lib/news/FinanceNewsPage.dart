@@ -17,6 +17,7 @@ import 'package:mystocks/news/entiy/ListEnity.dart';
 import 'package:mystocks/news/entiy/news_enity.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_refresh/flutter_refresh.dart';
+import 'package:mystocks/util/HexColor.dart';
 
 /**
  * 财经新闻页面
@@ -202,8 +203,8 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIos: 1,
-          bgcolor: "#OOOOOO",
-          textcolor: '#ffffff');
+          backgroundColor: HexColor("#OOOOOO"),
+          textColor: HexColor('#ffffff'));
     }
   }
 
@@ -211,12 +212,11 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
    * 列表中图片加载
    */
   getImage(String img_url) {
-    return new CachedNetworkImage(
+    return new
+    CachedNetworkImage(
       imageUrl: img_url,
-      errorWidget: new Icon(Icons.error),
-      fit: BoxFit.cover,
-      height: 85.0,
-      width: 100.0,
+      placeholder: (context, url) => new CircularProgressIndicator(),
+      errorWidget: (context, url, error) => new Icon(Icons.error),
     );
   }
 
@@ -287,8 +287,8 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
                 toastLength: Toast.LENGTH_SHORT,
                 gravity: ToastGravity.BOTTOM,
                 timeInSecForIos: 1,
-                bgcolor: "#OOOOOO",
-                textcolor: '#ffffff');
+                backgroundColor: HexColor("#OOOOOO"),
+                textColor: HexColor('#ffffff'));
           }
         });
       } else {
@@ -297,8 +297,8 @@ class FinanceNewsPageState extends State<FinanceNewsPage> {
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIos: 1,
-            bgcolor: "#OOOOOO",
-            textcolor: '#ffffff');
+            backgroundColor: HexColor("#OOOOOO"),
+            textColor: HexColor('#ffffff'));
       }
     } catch (e) {
       print("异常==》" + e.toString());
