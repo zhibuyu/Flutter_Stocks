@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mystocks/market/MarketPage.dart';
 import 'package:mystocks/market/StockIndexPage.dart';
-import 'package:mystocks/news/FinanceNewsPage.dart';
 import 'package:mystocks/my/MyInfoPage.dart';
+import 'package:mystocks/news/QQNewsPage.dart';
 import 'package:mystocks/widget/CustomIcon.dart';
 import 'package:mystocks/widget/CustomInactiveIcon.dart';
 import 'package:mystocks/my/MyDrawer.dart';
@@ -80,7 +80,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
   void initData() {
     body = new IndexedStack(
       children: [
-        new FinanceNewsPage(),
+        new QQNewsPage(),
         new StockIndexPage(),
         new MarketPage(),
         new MyInfoPage()

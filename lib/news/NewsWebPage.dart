@@ -39,7 +39,6 @@ class NewsWebPageState extends State<NewsWebPage>{
 
   @override
   void initState() {
-
     onStateChanged = flutterWebViewPlugin.onStateChanged.listen((WebViewStateChanged state){
       // state.type是一个枚举类型，取值有：WebViewState.shouldStart, WebViewState.startLoad, WebViewState.finishLoad
       if(state.type == WebViewState.shouldStart){

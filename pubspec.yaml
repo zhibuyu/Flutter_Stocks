@@ -32,7 +32,7 @@ dependencies:
   gbk2utf8: ^0.0.1
   fluwx: ^0.6.3
   share: ^0.5.3
-  flutter_html: ^0.10.1
+  flutter_html: ^0.8.2
 
 
 #dev_dependencies:
