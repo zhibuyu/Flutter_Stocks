@@ -13,6 +13,7 @@ import 'package:mystocks/news/NewsWebPage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_refresh/flutter_refresh.dart';
 import 'package:mystocks/news/entiy/qqnews_enity.dart';
+import 'package:mystocks/news/entiy/qqnews_enity1.dart';
 import 'package:mystocks/util/HexColor.dart';
 
 /**
@@ -212,9 +213,8 @@ class QQNewsPageState extends State<QQNewsPage> {
       var news = new qqnews_enity.fromJson(jsonString);
       var code = news.errorCode;
       if (code == 0) {
-
         setState(() {
-          listData =news.data;
+          listData = news.data;
           if(request_type==REFRESH_REQIEST){
             Fluttertoast.showToast(
                 msg: "刷新成功",
@@ -235,7 +235,38 @@ class QQNewsPageState extends State<QQNewsPage> {
             textColor: HexColor('#ffffff'));
       }
     } catch (e) {
-      print("异常==》" + e.toString());
+      try {
+        var news1 = new qqnews_enity1.fromJson(jsonString);
+        var code = news1.errorCode;
+        if (code == 0) {
+          setState(() {
+            Data1 data1 = news1.data;
+            if(data1 != null){
+              Data data = new Data(data1.title, data1.time, data1.column, data1.url);
+              listData.add(data);
+              if(request_type==REFRESH_REQIEST){
+                Fluttertoast.showToast(
+                    msg: "刷新成功",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIos: 1,
+                    backgroundColor: HexColor("#OOOOOO"),
+                    textColor: HexColor('#ffffff'));
+              }
+            }
+          });
+        } else {
+          Fluttertoast.showToast(
+              msg: "数据源异常",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIos: 1,
+              backgroundColor: HexColor("#OOOOOO"),
+              textColor: HexColor('#ffffff'));
+        }
+      } catch (e) {
+        print("异常==》" + e.toString());
+      }
     }
   }
 }
