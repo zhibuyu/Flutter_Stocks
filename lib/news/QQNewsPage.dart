@@ -241,6 +241,7 @@ class QQNewsPageState extends State<QQNewsPage> {
             Data1 data1 = news1.data;
             if(data1 != null){
               Data data = new Data(data1.title, data1.time, data1.column, data1.url);
+              listData.clear();
               listData.add(data);
               if(request_type==REFRESH_REQIEST){
                 Fluttertoast.showToast(
