@@ -6,7 +6,6 @@ import 'package:mystocks/market/StockDetailsPage.dart';
 import 'package:mystocks/market/enity/StockIndex.dart';
 import 'package:mystocks/Util/Constants.dart';
 import 'package:mystocks/news/entiy/ListEnity.dart';
-import 'package:mystocks/util/HexColor.dart';
 
 /**
  * @Description  指数
@@ -75,8 +74,8 @@ class StockIndexPageState extends State<StockIndexPage> {
                 toastLength: Toast.LENGTH_SHORT,
                 gravity: ToastGravity.BOTTOM,
                 timeInSecForIos: 1,
-                backgroundColor: HexColor("#OOOOOO"),
-                textColor: HexColor('#ffffff'));
+                backgroundColor: Colors.black,
+                textColor: Colors.white);
           }
         });
       });
@@ -86,8 +85,8 @@ class StockIndexPageState extends State<StockIndexPage> {
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIos: 1,
-          backgroundColor: HexColor("#OOOOOO"),
-          textColor: HexColor('#ffffff'));
+          backgroundColor: Colors.black,
+          textColor: Colors.white);
     });
 
   }

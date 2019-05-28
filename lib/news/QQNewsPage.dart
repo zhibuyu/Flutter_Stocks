@@ -14,8 +14,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_refresh/flutter_refresh.dart';
 import 'package:mystocks/news/entiy/qqnews_enity.dart';
 import 'package:mystocks/news/entiy/qqnews_enity1.dart';
-import 'package:mystocks/util/HexColor.dart';
-
 /**
  * 腾讯新闻页面
  */
@@ -221,8 +219,8 @@ class QQNewsPageState extends State<QQNewsPage> {
                 toastLength: Toast.LENGTH_SHORT,
                 gravity: ToastGravity.BOTTOM,
                 timeInSecForIos: 1,
-                backgroundColor: HexColor("#OOOOOO"),
-                textColor: HexColor('#ffffff'));
+                backgroundColor: Colors.black,
+                textColor: Colors.white);
           }
         });
       } else {
@@ -231,8 +229,8 @@ class QQNewsPageState extends State<QQNewsPage> {
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIos: 1,
-            backgroundColor: HexColor("#OOOOOO"),
-            textColor: HexColor('#ffffff'));
+            backgroundColor: Colors.black,
+            textColor: Colors.white);
       }
     } catch (e) {
       try {
@@ -250,8 +248,8 @@ class QQNewsPageState extends State<QQNewsPage> {
                     toastLength: Toast.LENGTH_SHORT,
                     gravity: ToastGravity.BOTTOM,
                     timeInSecForIos: 1,
-                    backgroundColor: HexColor("#OOOOOO"),
-                    textColor: HexColor('#ffffff'));
+                    backgroundColor: Colors.black,
+                    textColor: Colors.white);
               }
             }
           });
@@ -261,8 +259,8 @@ class QQNewsPageState extends State<QQNewsPage> {
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIos: 1,
-              backgroundColor: HexColor("#OOOOOO"),
-              textColor: HexColor('#ffffff'));
+              backgroundColor: Colors.black,
+              textColor: Colors.white);
         }
       } catch (e) {
         print("异常==》" + e.toString());

@@ -10,7 +10,6 @@ import 'package:mystocks/Util/DataUtils.dart';
 import 'package:mystocks/news/entiy/ListEnity.dart';
 import 'package:http/http.dart' as http;
 import 'package:gbk2utf8/gbk2utf8.dart';
-import 'package:mystocks/util/HexColor.dart';
 /**
  * @Description  个股详情
  * @Author  zhibuyu
@@ -432,8 +431,8 @@ class StockDetailsPageState extends State<StockDetailsPage>
                 toastLength: Toast.LENGTH_SHORT,
                 gravity: ToastGravity.BOTTOM,
                 timeInSecForIos: 1,
-                backgroundColor: HexColor("#OOOOOO"),
-                textColor: HexColor('#ffffff'));
+                backgroundColor: Colors.black,
+                textColor: Colors.white);
           }
         });
       }).catchError((e) {
@@ -442,8 +441,8 @@ class StockDetailsPageState extends State<StockDetailsPage>
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIos: 1,
-            backgroundColor: HexColor("#OOOOOO"),
-            textColor: HexColor('#ffffff'));
+            backgroundColor: Colors.black,
+            textColor: Colors.white);
       });
     }
   }
