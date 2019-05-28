@@ -154,12 +154,22 @@ class QQNewsPageState extends State<QQNewsPage> {
    * isLoadMore 是否为加载更多
    */
   void getDatas(int request_type) async {
-    String url = "https://api.shenjian.io/?appid=af7dabcf2baff628a2935cb89aaffd72";
-    print("请求的url===》" + url);
-    Dio dio = new Dio();
-    Response response = await dio.get(url);
-    var jsonString = response.data;
-    DealDatas(jsonString, request_type);
+    if(request_type ==LOADMORE_REQIEST){
+      Fluttertoast.showToast(
+          msg: "现有新闻数据源不支持加载更多",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIos: 1,
+          backgroundColor: Colors.black,
+          textColor: Colors.white);
+    }else{
+      String url = "https://api.shenjian.io/?appid=af7dabcf2baff628a2935cb89aaffd72";
+      print("请求的url===》" + url);
+      Dio dio = new Dio();
+      Response response = await dio.get(url);
+      var jsonString = response.data;
+      DealDatas(jsonString, request_type);
+    }
   }
 
   /**
