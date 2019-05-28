@@ -217,7 +217,7 @@ class CupertinoDessertDialog extends StatelessWidget {
           child: const Text('全平台分享'),
           onPressed: () {
             final RenderBox box = context.findRenderObject();
-            Share.share("https://github.com/zhibuyu/Flutter_Stocks/releases/tag/v0.01",
+            Share.share("https://github.com/zhibuyu/Flutter_Stocks/releases",
                 sharePositionOrigin:
                 box.localToGlobal(Offset.zero) &
                 box.size);
