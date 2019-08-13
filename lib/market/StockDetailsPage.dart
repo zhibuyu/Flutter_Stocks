@@ -188,7 +188,9 @@ class StockDetailsPageState extends State<StockDetailsPage>
       return Container(
           child: CachedNetworkImage(
             imageUrl: page.img_url,
-            placeholder: (context, url) => new CircularProgressIndicator(),
+            placeholder: (context, url) => new Center(
+              child: CircularProgressIndicator(),
+            ) ,
             errorWidget: (context, url, error) => new Icon(Icons.error),
           ));
     });

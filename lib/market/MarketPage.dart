@@ -37,9 +37,9 @@ class MarketPageState extends State<MarketPage> {
     stocks.clear();
     stocks.add(new Stock());
     String url =
-        "http://hq.sinajs.cn/list=sh601003,sh601001,sz002242,sz002230,sh603456,sz002736,sh600570,sz300104,sz000416,"
-        "sh600519,sz000001,sh601857,sz000333,sz000002,sz000651,sz002415,sz000651,sz300033,sz000418,sz000003,sz000005,"
-        "sz000006,sz000007,sz000008,sz000009,sz000010,sz000011,sz000012,sz000013,sz000014,sz000015,sz000016,sz000017";
+        "http://hq.sinajs.cn/list=sh601003,sh601001,sz002242,sz002230,sh603456,sz002736,sh600570,sz002456,sz000416,"+
+        "sh600519,sz000001,sh601857,sz000333,sz000002,sz000651,sz002415,sz000651,sz300033,sh688010,sh688028,sh688009,"+
+        "sh688012,sz300143,sz300143,sz002949,sz000012,sz300684,sz200613,sh900917,sz002448,sh600648,sz002351,sz300072";
     fetch(url).then((data) {
       setState(() {
         List<String> stockstrs = data.split(";");

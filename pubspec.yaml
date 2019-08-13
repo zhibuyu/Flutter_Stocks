@@ -21,7 +21,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   build_runner: ^1.4.0
   json_serializable: ^3.0.0
-  cached_network_image: ^0.8.0
+  cached_network_image: ^1.1.1
   dio: ^1.0.6
   date_format: ^1.0.6
   intl: ^0.15.8
@@ -33,6 +33,7 @@ dependencies:
   fluwx: ^0.6.3
   share: ^0.5.3
   flutter_html: ^0.8.2
+  convert: ^2.1.1
 
 
 
