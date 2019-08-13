@@ -110,7 +110,7 @@ class WyNewsPageState extends State<WyNewsPage> {
                   children: <Widget>[
                     new Expanded(
                       child: Container(
-                        height: 95.0,
+                        height: 100.0,
                         child: getImage(data.imgsrc),
                         alignment: FractionalOffset.center,
                       ),
@@ -118,7 +118,7 @@ class WyNewsPageState extends State<WyNewsPage> {
                     ),
                     new Expanded(
                       child: Container(
-                        height: 95.0,
+                        height: 100.0,
                         margin: new EdgeInsets.fromLTRB(5.0, 0.0, 0.0, 0.0),
                         child: new Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
