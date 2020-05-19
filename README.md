@@ -14,40 +14,29 @@
 
 ## 截图
 
-
 - **主界面**
-<img src="https://img-blog.csdnimg.cn/20200519144638641.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/> 
-<img src="(https://img-blog.csdnimg.cn/20200519144638169.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
-<img src="https://img-blog.csdnimg.cn/20200519144637474.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
-<img src="https://img-blog.csdnimg.cn/20200519144636550.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
 
- **新闻、指数、沪深股票详情**
+<img src="https://img-blog.csdnimg.cn/20200519144638641.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/> <img src="https://img-blog.csdnimg.cn/20200519151615342.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/> <img src="https://img-blog.csdnimg.cn/20200519144637474.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/> <img src="https://img-blog.csdnimg.cn/20200519144636550.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
 
-<img src="https://img-blog.csdnimg.cn/20200519144638236.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
-<img src="https://img-blog.csdnimg.cn/20200519144636863.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
-<img src="https://img-blog.csdnimg.cn/20200519144636939.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/> 
+ - **新闻、指数、沪深股票详情**
+
+<img src="https://img-blog.csdnimg.cn/20200519144638236.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/> <img src="https://img-blog.csdnimg.cn/20200519144636863.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/> <img src="https://img-blog.csdnimg.cn/20200519144636939.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/> 
 
 - **我的**
 
-<img src="https://img-blog.csdnimg.cn/20200519144638823.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/> 
-<img src="https://img-blog.csdnimg.cn/20200519144639376.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
-<img src="https://img-blog.csdnimg.cn/202005191446404.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/> 
-<img src="https://img-blog.csdnimg.cn/20200519144637309.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
+<img src="https://img-blog.csdnimg.cn/20200519144638823.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/> <img src="https://img-blog.csdnimg.cn/20200519144639376.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/> <img src="https://img-blog.csdnimg.cn/202005191446404.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/> <img src="https://img-blog.csdnimg.cn/20200519144637309.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
 
 
 
 - **启动页、登录、侧边栏**
 
-<img src="https://img-blog.csdnimg.cn/20200519144636146.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
-<img src="https://img-blog.csdnimg.cn/20200519144636313.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
-<img src="https://img-blog.csdnimg.cn/20200519144637124.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/> 
+<img src="https://img-blog.csdnimg.cn/20200519144636146.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/> <img src="https://img-blog.csdnimg.cn/20200519144636313.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/> <img src="https://img-blog.csdnimg.cn/20200519144637124.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/> 
 
 </br>
 
 - **底部按钮主题切换**
 
-<img src="https://img-blog.csdnimg.cn/20200519144640406.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
- <img src="https://img-blog.csdnimg.cn/20200519144638578.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
+<img src="https://img-blog.csdnimg.cn/20200519144640406.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/> <img src="https://img-blog.csdnimg.cn/20200519144638578.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
 
 </br>
 
