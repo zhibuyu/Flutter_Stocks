@@ -14,37 +14,44 @@
 
 ## 截图
 
+
 - **主界面**
+<img src="https://img-blog.csdnimg.cn/20200519144638641.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/> 
+<img src="(https://img-blog.csdnimg.cn/20200519144638169.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
+<img src="https://img-blog.csdnimg.cn/20200519144637474.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
+<img src="https://img-blog.csdnimg.cn/20200519144636550.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
 
-<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/main_news.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/main_index.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/main_husheng.jpg?raw=true" width="280"/><img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/my.jpg?raw=true" width="280"/>
+ **新闻、指数、沪深股票详情**
 
-</br>
-
-- **新闻、指数、沪深股票详情**
-
-<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/news_deatil.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/index_detail.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/stock_detail.jpg?raw=true" width="280"/> 
-
-</br>
-
+<img src="https://img-blog.csdnimg.cn/20200519144638236.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
+<img src="https://img-blog.csdnimg.cn/20200519144636863.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
+<img src="https://img-blog.csdnimg.cn/20200519144636939.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/> 
 
 - **我的**
 
-<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/my_blog.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/my_open.jpg?raw=true" width="280"/><img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/my_wechat.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/my_feedback.jpg?raw=true" width="280"/>
+<img src="https://img-blog.csdnimg.cn/20200519144638823.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/> 
+<img src="https://img-blog.csdnimg.cn/20200519144639376.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
+<img src="https://img-blog.csdnimg.cn/202005191446404.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/> 
+<img src="https://img-blog.csdnimg.cn/20200519144637309.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
 
-</br>
+
 
 - **启动页、登录、侧边栏**
 
-<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/splsh.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/login.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/slide_menu.jpg?raw=true" width="280"/> 
+<img src="https://img-blog.csdnimg.cn/20200519144636146.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
+<img src="https://img-blog.csdnimg.cn/20200519144636313.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
+<img src="https://img-blog.csdnimg.cn/20200519144637124.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/> 
 
 </br>
 
 - **底部按钮主题切换**
 
-<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/change1.jpg?raw=true" width="280"/> <img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/change2.jpg?raw=true" width="280"/>
+<img src="https://img-blog.csdnimg.cn/20200519144640406.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
+ <img src="https://img-blog.csdnimg.cn/20200519144638578.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
 
 </br>
 
 - **分享**
 
-<img src="https://github.com/zhibuyu/Flutter_Stocks/blob/master/show_pics/share.jpg?raw=true" width="280"/>
+<img src="https://img-blog.csdnimg.cn/20200519144636564.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70" width="280"/>
+
