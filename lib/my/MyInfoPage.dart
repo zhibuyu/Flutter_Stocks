@@ -1,15 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:fluwx/fluwx.dart';
 import 'package:mystocks/Login/LoginPage.dart';
 import 'package:mystocks/news/NewsWebPage.dart';
 import 'package:mystocks/my/WechatPage.dart';
-import 'package:fluwx/fluwx.dart' as fluwx;
+import 'package:fluwx_no_pay/fluwx_no_pay.dart';
 import 'package:share/share.dart';
 
 /**
- * @Description  文我的界面
+ * @Description  我的界面
  * @Author  zhibuyu
  * @Date 2018/10/25  10:26
  * @Version  1.0
@@ -23,6 +22,10 @@ class MyInfoPage extends StatefulWidget {
 class MyInfoPageState extends State<MyInfoPage> {
   static const double IMAGE_ICON_WIDTH = 30.0;
   static const double ARROW_ICON_WIDTH = 16.0;
+
+
+  WeChatImage source;
+  WeChatImage thumbnail;
 
   var titles = ["", "我的博客", "我的Github", "我的微信", "意见反馈", "分享"];
   List icons = [
@@ -43,7 +46,17 @@ class MyInfoPageState extends State<MyInfoPage> {
   @override
   void initState() {
     super.initState();
-    fluwx.register(appId: "wx423d7d8752fd810c");
+    _initFluwx();
+//    registerWxApi(appId: "wx423d7d8752fd810c",universalLink: "https://your.univerallink.com/link/");
+  }
+  _initFluwx() async {
+    await registerWxApi(
+        appId: "wx423d7d8752fd810c",
+        doOnAndroid: true,
+        doOnIOS: true,
+        universalLink: "https://your.univerallink.com/link/");
+    var result = await isWeChatInstalled;
+    print("is installed $result");
   }
 
   Widget getIconImage(path) {
@@ -199,13 +212,16 @@ class MyInfoPageState extends State<MyInfoPage> {
     });
   }
 }
-
+ String imgae_path = "https://img-blog.csdnimg.cn/20181031181957659.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxMjM2NDM=,size_16,color_FFFFFF,t_70";
+ WeChatImage source = WeChatImage.network(imgae_path);
 class CupertinoDessertDialog extends StatelessWidget {
+
   const CupertinoDessertDialog({Key key, this.title, this.content})
       : super(key: key);
 
   final Widget title;
   final Widget content;
+
 
   @override
   Widget build(BuildContext context) {
@@ -227,36 +243,21 @@ class CupertinoDessertDialog extends StatelessWidget {
         CupertinoDialogAction(
           child: const Text('微信好友'),
           onPressed: () {
-            fluwx.share(WeChatShareImageModel(
-                image: "assets://images/down_qrcode.png",
-                thumbnail: "",
-                transaction: "",
-                scene: WeChatScene.SESSION,
-                description: "image"));
+//            shareToWeChat(WeChatShareTextModel("测试分享，子不语", scene: WeChatScene.SESSION));文本分享
+            shareToWeChat(WeChatShareImageModel(source,scene: WeChatScene.SESSION));//图片分享
             Navigator.pop(context, 'Cancel');
           },
         ),
         CupertinoDialogAction(
           child: const Text('微信朋友圈'),
           onPressed: () {
-            fluwx.share(WeChatShareImageModel(
-                image: "assets://images/down_qrcode.png",
-                thumbnail: "",
-                transaction: "",
-                scene: WeChatScene.TIMELINE,
-                description: "image"));
-            Navigator.pop(context, 'Cancel');
+            shareToWeChat(WeChatShareImageModel(source,scene: WeChatScene.TIMELINE));
           },
         ),
         CupertinoDialogAction(
           child: const Text("微信收藏"),
           onPressed: () {
-            fluwx.share(WeChatShareImageModel(
-                image: "assets://images/down_qrcode.png",
-                thumbnail: "",
-                transaction: "",
-                scene: WeChatScene.FAVORITE,
-                description: "image"));
+            shareToWeChat(WeChatShareImageModel(source,scene: WeChatScene.FAVORITE));
             Navigator.pop(context, 'Cancel');
           },
         ),
